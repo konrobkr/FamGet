@@ -214,6 +214,40 @@ self.addEventListener('fetch',e=>{
   navigator.serviceWorker.register(url,{scope:'./'}).catch(()=>{});
 }
 </script>
+
+<script>
+// Auto-format number inputs with thousand separator
+function setupNumberInputs(){
+  document.querySelectorAll('input[type=number]').forEach(inp=>{
+    // Replace with text input for formatting
+    const newInp=document.createElement('input');
+    newInp.type='text';
+    newInp.inputMode='numeric';
+    newInp.id=inp.id;
+    newInp.placeholder=inp.placeholder||'0';
+    newInp.className=inp.className;
+    newInp.style.cssText=inp.style.cssText;
+    newInp.dataset.raw='0';
+    newInp.addEventListener('input',function(){
+      const raw=this.value.replace(/[^0-9]/g,'');
+      this.dataset.raw=raw||'0';
+      this.value=raw?parseInt(raw).toLocaleString('id-ID'):'';
+    });
+    newInp.getRawValue=function(){ return parseFloat(this.dataset.raw)||0; };
+    inp.parentNode.replaceChild(newInp,inp);
+  });
+}
+
+// Override parseFloat for formatted inputs
+const _origGetById=document.getElementById.bind(document);
+function getRaw(id){
+  const el=_origGetById(id);
+  if(!el) return 0;
+  if(el.dataset&&el.dataset.raw!==undefined) return parseFloat(el.dataset.raw)||0;
+  return parseFloat(el.value)||0;
+}
+</script>
+
 </head>
 <body>
 <div id="app">
@@ -530,7 +564,7 @@ function renderCatManage(){
 // ── SAVE TRANSACTION ──────────────────────────────────
 function saveTx(){
   const d=db();
-  const amt=parseFloat(document.getElementById('txAmt').value)||0;
+  const amt=getRaw('txAmt');
   const walletId=document.getElementById('txWallet').value;
   const date=document.getElementById('txDate').value;
   if(!amt){showNotif('Masukkan nominal!');return;}
@@ -566,7 +600,7 @@ function saveTx(){
 
   d.transactions.unshift(tx);
   save(d);
-  document.getElementById('txAmt').value='';
+  document.getElementById('txAmt').value=''; document.getElementById('txAmt').dataset.raw='0';
   document.getElementById('txDesc').value='';
   document.getElementById('txDate').value=new Date().toISOString().slice(0,10);
   showNotif('Tersimpan!');
@@ -597,7 +631,7 @@ function saveWallet(){
   const name=document.getElementById('wName').value.trim();
   if(!name){showNotif('Masukkan nama wallet!');return;}
   const d=db();
-  const bal=parseFloat(document.getElementById('wBal').value)||0;
+  const bal=getRaw('wBal');
   if(editWalletId){
     const wi=d.wallets.findIndex(w=>w.id===editWalletId);
     if(wi>=0){
@@ -667,7 +701,7 @@ function openBudgetModal(){
 
 function saveBudget(){
   const cat=document.getElementById('bCat').value;
-  const limit=parseFloat(document.getElementById('bLimit').value)||0;
+  const limit=getRaw('bLimit');
   const owner=document.getElementById('bOwner').value;
   if(!limit){showNotif('Masukkan limit!');return;}
   const d=db();
@@ -803,7 +837,7 @@ function saveEditTx(){
   const d=db();
   const ti=d.transactions.findIndex(t=>t.id===editTxId);
   if(ti<0) return;
-  const newAmt=parseFloat(document.getElementById('etAmt').value)||0;
+  const newAmt=getRaw('etAmt');
   const oldAmt=d.transactions[ti].amt;
   const diff=newAmt-oldAmt;
   const type=d.transactions[ti].type;
@@ -938,6 +972,7 @@ function showNotif(msg){
 
 // ── START ─────────────────────────────────────────────
 init();
+setupNumberInputs();
 </script>
 </body>
 </html>
