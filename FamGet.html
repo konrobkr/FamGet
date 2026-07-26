@@ -983,7 +983,7 @@ const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzwd2gMCEXww_MolTS5hQ
 
 async function syncToSheets(tx, walletName, saldoWallet) {
   try {
-    const payload = {
+    const params = new URLSearchParams({
       type: 'transaction',
       tanggal: tx.date,
       tipe: tx.type === 'out' ? 'Pengeluaran' : tx.type === 'in' ? 'Pemasukan' : 'Transfer',
@@ -993,13 +993,10 @@ async function syncToSheets(tx, walletName, saldoWallet) {
       nominal: tx.amt,
       catatan: tx.desc || '',
       saldoWallet: saldoWallet || 0
-    };
-    const form = new FormData();
-    form.append('data', JSON.stringify(payload));
-    await fetch(SHEET_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: form
+    });
+    await fetch('https://script.google.com/macros/s/AKfycbzwd2gMCEXww_MolTS5hQ7T6EHGPoPSguRmq9fKqqUlU-8n4W5pWTdIP-diFbjQ3U-g/exec?' + params.toString(), {
+      method: 'GET',
+      mode: 'no-cors'
     });
   } catch(e) {
     console.warn('Sync transaction failed:', e);
@@ -1009,21 +1006,14 @@ async function syncToSheets(tx, walletName, saldoWallet) {
 async function syncWalletsToSheets() {
   try {
     const d = db();
-    const payload = {
+    const wallets = d.wallets.map(w => w.name + '|' + w.type + '|' + (w.icon||'💳') + '|' + w.balance).join(';;');
+    const params = new URLSearchParams({
       type: 'wallets',
-      wallets: d.wallets.map(w => ({
-        name: w.name,
-        type: w.type,
-        icon: w.icon || '💳',
-        balance: w.balance
-      }))
-    };
-    const form = new FormData();
-    form.append('data', JSON.stringify(payload));
-    await fetch(SHEET_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: form
+      wallets: wallets
+    });
+    await fetch('https://script.google.com/macros/s/AKfycbzwd2gMCEXww_MolTS5hQ7T6EHGPoPSguRmq9fKqqUlU-8n4W5pWTdIP-diFbjQ3U-g/exec?' + params.toString(), {
+      method: 'GET',
+      mode: 'no-cors'
     });
   } catch(e) {
     console.warn('Sync wallets failed:', e);
