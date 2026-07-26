@@ -600,10 +600,13 @@ function saveTx(){
 
   d.transactions.unshift(tx);
   save(d);
+  // Sync to Google Sheets
+  const walletName = d.wallets.find(w=>String(w.id)===String(walletId))?.name || '-';
+  syncToSheets(tx, walletName).then(()=>{}).catch(()=>{});
   document.getElementById('txAmt').value=''; document.getElementById('txAmt').dataset.raw='0';
   document.getElementById('txDesc').value='';
   document.getElementById('txDate').value=new Date().toISOString().slice(0,10);
-  showNotif('Tersimpan!');
+  showNotif('✅ Tersimpan & synced!');
   renderWalletList();
 }
 
@@ -968,6 +971,32 @@ function showNotif(msg){
   const n=document.getElementById('notif');
   n.textContent=msg; n.classList.add('show');
   setTimeout(()=>n.classList.remove('show'),2000);
+}
+
+
+// ── GOOGLE SHEETS SYNC ───────────────────────────────
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzwd2gMCEXww_MolTS5hQ7T6EHGPoPSguRmq9fKqqUlU-8n4W5pWTdIP-diFbjQ3U-g/exec';
+
+async function syncToSheets(tx, walletName) {
+  try {
+    const payload = {
+      tanggal: tx.date,
+      tipe: tx.type === 'out' ? 'Pengeluaran' : tx.type === 'in' ? 'Pemasukan' : 'Transfer',
+      owner: tx.owner || '-',
+      wallet: walletName || '-',
+      kategori: tx.cat || '-',
+      nominal: tx.amt,
+      catatan: tx.desc || ''
+    };
+    await fetch(SHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    });
+  } catch(e) {
+    console.warn('Sync failed:', e);
+  }
 }
 
 // ── START ─────────────────────────────────────────────
