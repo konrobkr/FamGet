@@ -985,27 +985,41 @@ function showNotif(msg){
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzwd2gMCEXww_MolTS5hQ7T6EHGPoPSguRmq9fKqqUlU-8n4W5pWTdIP-diFbjQ3U-g/exec';
 
 async function syncAllToSheets() {
-  // Sync ALL transactions (full replace) — handles add/edit/delete
   try {
     const d = db();
+
+    // Fix date format: extract YYYY-MM-DD only
+    function fixDate(dateStr) {
+      if (!dateStr) return '';
+      if (dateStr.length === 10) return dateStr; // already YYYY-MM-DD
+      return new Date(dateStr).toISOString().slice(0,10);
+    }
+
     const txRows = d.transactions.map(tx => {
       const w = d.wallets.find(x=>String(x.id)===String(tx.wallet));
+      const walletName = w ? w.name : (typeof tx.wallet === 'string' ? tx.wallet : '-');
       return [
-        tx.date,
+        fixDate(tx.date),
         tx.type==='out'?'Pengeluaran':tx.type==='in'?'Pemasukan':'Transfer',
         tx.owner||'-',
-        w?w.name:'-',
+        walletName,
         tx.cat||'-',
         tx.amt,
         tx.desc||'',
         tx.id
       ].join('|');
     });
+
+    const walletRows = d.wallets.map(w =>
+      [w.name, w.type, w.icon||'💳', w.balance].join('|')
+    );
+
     const params = new URLSearchParams({
       type: 'sync_all',
       transactions: txRows.join(';;'),
-      wallets: d.wallets.map(w=>[w.name,w.type,w.icon||'💳',w.balance].join('|')).join(';;')
+      wallets: walletRows.join(';;')
     });
+
     await fetch('https://script.google.com/macros/s/AKfycbzwd2gMCEXww_MolTS5hQ7T6EHGPoPSguRmq9fKqqUlU-8n4W5pWTdIP-diFbjQ3U-g/exec?' + params.toString(), {
       method: 'GET',
       mode: 'no-cors'
@@ -1032,16 +1046,23 @@ async function pullFromSheets() {
     if(data.status==='ok' && data.transactions) {
       const d = db();
       // Merge: keep local wallets, replace transactions from Sheets
-      const txs = data.transactions.map(r => ({
-        id: parseInt(r[7])||Date.now(),
-        date: r[0],
-        type: r[1]==='Pengeluaran'?'out':r[1]==='Pemasukan'?'in':'tf',
-        owner: r[2],
-        wallet: r[3],
-        cat: r[4],
-        amt: parseFloat(r[5])||0,
-        desc: r[6]
-      }));
+      const txs = data.transactions.map(r => {
+        // Fix date format on pull
+        let dateVal = r[0];
+        if (dateVal instanceof Date || (typeof dateVal === 'string' && dateVal.length > 10)) {
+          dateVal = new Date(dateVal).toISOString().slice(0,10);
+        }
+        return {
+          id: parseInt(r[7])||Date.now(),
+          date: String(dateVal).slice(0,10),
+          type: r[1]==='Pengeluaran'?'out':r[1]==='Pemasukan'?'in':'tf',
+          owner: r[2],
+          wallet: r[3],
+          cat: r[4],
+          amt: parseFloat(r[5])||0,
+          desc: r[6]||''
+        };
+      });
       d.transactions = txs;
       save(d);
       renderTxList();
