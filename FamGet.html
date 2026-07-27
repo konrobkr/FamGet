@@ -802,7 +802,7 @@ function renderTxList(){
         <div class="tx-icon ${t.type}">${icon}</div>
         <div class="tx-info">
           <div class="tx-desc">${t.desc||t.cat}</div>
-          <div class="tx-meta">${t.cat} · ${wallet(t.wallet)}${ownerTag}</div>
+          <div class="tx-meta">${t.cat} · ${wallet(t.wallet)}${t.type==='tf'&&t.walletTo?` → ${wallet(t.walletTo)}`:''}${ownerTag}</div>
         </div>
         <div class="tx-amt ${t.type}">${t.type==='out'?'-':'+'} ${fmtk(t.amt)}</div>
         <div class="tx-actions">
@@ -1008,11 +1008,14 @@ async function syncAllToSheets() {
     const txRows = d.transactions.map(tx => {
       const w = d.wallets.find(x=>String(x.id)===String(tx.wallet));
       const walletName = w ? w.name : (typeof tx.wallet === 'string' ? tx.wallet : '-');
+      const wTo = d.wallets.find(x=>String(x.id)===String(tx.walletTo));
+      const walletToName = wTo ? wTo.name : (typeof tx.walletTo === 'string' ? tx.walletTo : '-');
       return [
         fixDate(tx.date),
         tx.type==='out'?'Pengeluaran':tx.type==='in'?'Pemasukan':'Transfer',
         tx.owner||'-',
         walletName,
+        walletToName,
         tx.cat||'-',
         tx.amt,
         tx.desc||'',
@@ -1062,15 +1065,17 @@ async function pullFromSheets() {
         // If ISO format with time, just take date part directly
         if (dateVal.includes('T')) dateVal = dateVal.slice(0,10);
         // If already YYYY-MM-DD, keep as is
+        // cols from sheets: Tanggal,Tipe,Owner,Wallet,WalletTujuan,Kategori,Nominal,Catatan,ID
         return {
-          id: parseInt(r[7])||Date.now(),
+          id: parseInt(r[8])||Date.now(),
           date: dateVal.slice(0,10),
           type: r[1]==='Pengeluaran'?'out':r[1]==='Pemasukan'?'in':'tf',
           owner: r[2]||'-',
-          wallet: r[3]||'-',  // store wallet NAME as string
-          cat: r[4]||'-',
-          amt: parseFloat(r[5])||0,
-          desc: r[6]||''
+          wallet: r[3]||'-',
+          walletTo: r[4]||'',
+          cat: r[5]||'-',
+          amt: parseFloat(r[6])||0,
+          desc: r[7]||''
         };
       });
       d.transactions = txs;
@@ -1095,9 +1100,9 @@ function recalcWalletBalances() {
   d.wallets.forEach(w => { w.balance = w.initialBalance || 0; });
   // Hitung ulang dari semua transaksi
   d.transactions.forEach(tx => {
-    // Match by wallet name (untuk transaksi hasil pull)
+    // Match by ID or name (for pulled transactions)
     const wi = d.wallets.findIndex(w =>
-      String(w.id) === String(tx.wallet) || w.name === tx.wallet
+      String(w.id) === String(tx.wallet) || w.name === String(tx.wallet)
     );
     if (wi < 0) return;
     if (tx.type === 'out') d.wallets[wi].balance -= tx.amt;
@@ -1105,7 +1110,7 @@ function recalcWalletBalances() {
     else if (tx.type === 'tf') {
       d.wallets[wi].balance -= tx.amt;
       const toi = d.wallets.findIndex(w =>
-        String(w.id) === String(tx.walletTo) || w.name === tx.walletTo
+        String(w.id) === String(tx.walletTo) || w.name === String(tx.walletTo)
       );
       if (toi >= 0) d.wallets[toi].balance += tx.amt;
     }
