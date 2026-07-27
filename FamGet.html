@@ -785,7 +785,16 @@ function renderTxList(){
   txs.forEach(t=>{ if(!byDate[t.date]) byDate[t.date]=[]; byDate[t.date].push(t); });
   el.innerHTML=Object.keys(byDate).sort().reverse().map(date=>{
     const items=byDate[date];
-    const wallet=id=>{ const w=d.wallets.find(x=>String(x.id)===String(id)); return w?w.name:'?'; };
+    const wallet=id=>{
+      // Try ID match first
+      const byId=d.wallets.find(x=>String(x.id)===String(id));
+      if(byId) return byId.name;
+      // Try name match (for pulled transactions)
+      const byName=d.wallets.find(x=>x.name===String(id));
+      if(byName) return byName.name;
+      // Return as-is if it looks like a wallet name, else '?'
+      return (typeof id==='string'&&id.length>0&&id!=='-')?id:'?';
+    };
     return `<div class="slbl">${date}</div><div class="card">${items.map(t=>{
       const icon=t.type==='out'?'⬆':t.type==='in'?'⬇':'↔';
       const ownerTag=t.owner&&t.owner!=='Pemasukan'?`<span class="tx-tag ${t.owner==='Keluarga'?'fam':'pri'}">${t.owner}</span>`:'';
@@ -988,11 +997,12 @@ async function syncAllToSheets() {
   try {
     const d = db();
 
-    // Fix date format: extract YYYY-MM-DD only
+    // Fix date format: extract YYYY-MM-DD only, avoid timezone shift
     function fixDate(dateStr) {
       if (!dateStr) return '';
-      if (dateStr.length === 10) return dateStr; // already YYYY-MM-DD
-      return new Date(dateStr).toISOString().slice(0,10);
+      const s = String(dateStr).trim();
+      if (s.length >= 10 && s.includes('-')) return s.slice(0,10);
+      return s;
     }
 
     const txRows = d.transactions.map(tx => {
@@ -1047,18 +1057,18 @@ async function pullFromSheets() {
       const d = db();
       // Merge: keep local wallets, replace transactions from Sheets
       const txs = data.transactions.map(r => {
-        // Fix date format on pull
-        let dateVal = r[0];
-        if (dateVal instanceof Date || (typeof dateVal === 'string' && dateVal.length > 10)) {
-          dateVal = new Date(dateVal).toISOString().slice(0,10);
-        }
+        // Fix date: use string slice only, avoid Date() constructor timezone shift
+        let dateVal = String(r[0]||'').trim();
+        // If ISO format with time, just take date part directly
+        if (dateVal.includes('T')) dateVal = dateVal.slice(0,10);
+        // If already YYYY-MM-DD, keep as is
         return {
           id: parseInt(r[7])||Date.now(),
-          date: String(dateVal).slice(0,10),
+          date: dateVal.slice(0,10),
           type: r[1]==='Pengeluaran'?'out':r[1]==='Pemasukan'?'in':'tf',
-          owner: r[2],
-          wallet: r[3],
-          cat: r[4],
+          owner: r[2]||'-',
+          wallet: r[3]||'-',  // store wallet NAME as string
+          cat: r[4]||'-',
           amt: parseFloat(r[5])||0,
           desc: r[6]||''
         };
