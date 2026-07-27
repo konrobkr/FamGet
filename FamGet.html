@@ -428,7 +428,8 @@ function getRaw(id){
     </div>
     <div class="slbl">Sync</div>
     <button class="btn-p" style="margin-bottom:8px;background:linear-gradient(135deg,#3b82f6,#1d4ed8)" onclick="pullFromSheets();closeModal('settingsModal')">☁️ Pull Data dari Sheets</button>
-    <button class="btn-p" style="margin-bottom:12px;background:linear-gradient(135deg,#059669,#047857)" onclick="syncAllToSheets().then(()=>showNotif('✅ Pushed!'))">⬆️ Push Semua ke Sheets</button>
+    <button class="btn-p" style="margin-bottom:8px;background:linear-gradient(135deg,#059669,#047857)" onclick="syncAllToSheets().then(()=>showNotif('✅ Pushed!'))">⬆️ Push Semua ke Sheets</button>
+    <button class="btn-p" style="margin-bottom:12px;background:linear-gradient(135deg,#7c3aed,#5b21b6)" onclick="recalcWalletBalances();closeModal('settingsModal')">🔄 Recalculate Saldo Wallet</button>
     <div class="slbl">Data</div>
     <button class="btn-danger" style="width:100%;padding:11px;border-radius:8px" onclick="clearAllData()">🗑 Hapus Semua Data</button>
   </div>
@@ -646,7 +647,7 @@ function saveWallet(){
       d.wallets[wi].icon=document.getElementById('wIcon').value||'💳';
     }
   } else {
-    d.wallets.push({id:Date.now(),name,type:document.getElementById('wType').value,balance:bal,icon:document.getElementById('wIcon').value||'💳',createdAt:new Date().toISOString()});
+    d.wallets.push({id:Date.now(),name,type:document.getElementById('wType').value,balance:bal,initialBalance:bal,icon:document.getElementById('wIcon').value||'💳',createdAt:new Date().toISOString()});
   }
   save(d);
   closeModal('walletModal');
@@ -1055,6 +1056,33 @@ async function pullFromSheets() {
   }
 }
 
+
+function recalcWalletBalances() {
+  const d = db();
+  if (!d.wallets.length) { showNotif('Buat wallet dulu!'); return; }
+  // Reset semua saldo ke saldo awal (0 jika tidak ada)
+  d.wallets.forEach(w => { w.balance = w.initialBalance || 0; });
+  // Hitung ulang dari semua transaksi
+  d.transactions.forEach(tx => {
+    // Match by wallet name (untuk transaksi hasil pull)
+    const wi = d.wallets.findIndex(w =>
+      String(w.id) === String(tx.wallet) || w.name === tx.wallet
+    );
+    if (wi < 0) return;
+    if (tx.type === 'out') d.wallets[wi].balance -= tx.amt;
+    else if (tx.type === 'in') d.wallets[wi].balance += tx.amt;
+    else if (tx.type === 'tf') {
+      d.wallets[wi].balance -= tx.amt;
+      const toi = d.wallets.findIndex(w =>
+        String(w.id) === String(tx.walletTo) || w.name === tx.walletTo
+      );
+      if (toi >= 0) d.wallets[toi].balance += tx.amt;
+    }
+  });
+  save(d);
+  renderWalletList();
+  showNotif('✅ Saldo berhasil dihitung ulang!');
+}
 // ── START ─────────────────────────────────────────────
 init();
 setupNumberInputs();
