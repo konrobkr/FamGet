@@ -426,6 +426,9 @@ function getRaw(id){
       <input type="text" id="newCatSetting" placeholder="Tambah kategori..." style="flex:1">
       <button class="btn-s" onclick="addCatFromSettings()">Tambah</button>
     </div>
+    <div class="slbl">Sync</div>
+    <button class="btn-p" style="margin-bottom:8px;background:linear-gradient(135deg,#3b82f6,#1d4ed8)" onclick="pullFromSheets();closeModal('settingsModal')">☁️ Pull Data dari Sheets</button>
+    <button class="btn-p" style="margin-bottom:12px;background:linear-gradient(135deg,#059669,#047857)" onclick="syncAllToSheets().then(()=>showNotif('✅ Pushed!'))">⬆️ Push Semua ke Sheets</button>
     <div class="slbl">Data</div>
     <button class="btn-danger" style="width:100%;padding:11px;border-radius:8px" onclick="clearAllData()">🗑 Hapus Semua Data</button>
   </div>
@@ -601,14 +604,11 @@ function saveTx(){
   d.transactions.unshift(tx);
   save(d);
   // Sync to Google Sheets
-  const walletAfter = d.wallets.find(w=>String(w.id)===String(walletId));
-  const walletName = walletAfter?.name || '-';
-  const saldoAfter = walletAfter?.balance || 0;
-  syncToSheets(tx, walletName, saldoAfter).then(()=>{}).catch(()=>{});
+  syncAllToSheets().then(()=>{}).catch(()=>{});
   document.getElementById('txAmt').value=''; document.getElementById('txAmt').dataset.raw='0';
   document.getElementById('txDesc').value='';
   document.getElementById('txDate').value=new Date().toISOString().slice(0,10);
-  showNotif('✅ Tersimpan & synced!');
+  showNotif('✅ Tersimpan!');
   renderWalletList();
 }
 
@@ -824,6 +824,7 @@ function deleteTx(id){
   save(d);
   renderTxList();
   renderWalletList();
+  syncAllToSheets().then(()=>{}).catch(()=>{});
   showNotif('Transaksi dihapus.');
 }
 
@@ -861,6 +862,7 @@ function saveEditTx(){
   closeModal('editTxModal');
   renderTxList();
   renderWalletList();
+  syncAllToSheets().then(()=>{}).catch(()=>{});
   showNotif('Transaksi diupdate!');
   editTxId=null;
 }
@@ -981,42 +983,75 @@ function showNotif(msg){
 // ── GOOGLE SHEETS SYNC ───────────────────────────────
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzwd2gMCEXww_MolTS5hQ7T6EHGPoPSguRmq9fKqqUlU-8n4W5pWTdIP-diFbjQ3U-g/exec';
 
-async function syncToSheets(tx, walletName, saldoWallet) {
+async function syncAllToSheets() {
+  // Sync ALL transactions (full replace) — handles add/edit/delete
   try {
+    const d = db();
+    const txRows = d.transactions.map(tx => {
+      const w = d.wallets.find(x=>String(x.id)===String(tx.wallet));
+      return [
+        tx.date,
+        tx.type==='out'?'Pengeluaran':tx.type==='in'?'Pemasukan':'Transfer',
+        tx.owner||'-',
+        w?w.name:'-',
+        tx.cat||'-',
+        tx.amt,
+        tx.desc||'',
+        tx.id
+      ].join('|');
+    });
     const params = new URLSearchParams({
-      type: 'transaction',
-      tanggal: tx.date,
-      tipe: tx.type === 'out' ? 'Pengeluaran' : tx.type === 'in' ? 'Pemasukan' : 'Transfer',
-      owner: tx.owner || '-',
-      wallet: walletName || '-',
-      kategori: tx.cat || '-',
-      nominal: tx.amt,
-      catatan: tx.desc || '',
-      saldoWallet: saldoWallet || 0
+      type: 'sync_all',
+      transactions: txRows.join(';;'),
+      wallets: d.wallets.map(w=>[w.name,w.type,w.icon||'💳',w.balance].join('|')).join(';;')
     });
     await fetch('https://script.google.com/macros/s/AKfycbzwd2gMCEXww_MolTS5hQ7T6EHGPoPSguRmq9fKqqUlU-8n4W5pWTdIP-diFbjQ3U-g/exec?' + params.toString(), {
       method: 'GET',
       mode: 'no-cors'
     });
   } catch(e) {
-    console.warn('Sync transaction failed:', e);
+    console.warn('Sync failed:', e);
   }
 }
 
+async function syncToSheets(tx, walletName, saldoWallet) {
+  // After any transaction change, sync everything
+  await syncAllToSheets();
+}
+
 async function syncWalletsToSheets() {
+  await syncAllToSheets();
+}
+
+async function pullFromSheets() {
   try {
-    const d = db();
-    const wallets = d.wallets.map(w => w.name + '|' + w.type + '|' + (w.icon||'💳') + '|' + w.balance).join(';;');
-    const params = new URLSearchParams({
-      type: 'wallets',
-      wallets: wallets
-    });
-    await fetch('https://script.google.com/macros/s/AKfycbzwd2gMCEXww_MolTS5hQ7T6EHGPoPSguRmq9fKqqUlU-8n4W5pWTdIP-diFbjQ3U-g/exec?' + params.toString(), {
-      method: 'GET',
-      mode: 'no-cors'
-    });
+    showNotif('⏳ Pulling dari Sheets...');
+    const resp = await fetch('https://script.google.com/macros/s/AKfycbzwd2gMCEXww_MolTS5hQ7T6EHGPoPSguRmq9fKqqUlU-8n4W5pWTdIP-diFbjQ3U-g/exec?type=pull');
+    const data = await resp.json();
+    if(data.status==='ok' && data.transactions) {
+      const d = db();
+      // Merge: keep local wallets, replace transactions from Sheets
+      const txs = data.transactions.map(r => ({
+        id: parseInt(r[7])||Date.now(),
+        date: r[0],
+        type: r[1]==='Pengeluaran'?'out':r[1]==='Pemasukan'?'in':'tf',
+        owner: r[2],
+        wallet: r[3],
+        cat: r[4],
+        amt: parseFloat(r[5])||0,
+        desc: r[6]
+      }));
+      d.transactions = txs;
+      save(d);
+      renderTxList();
+      renderDash();
+      renderWalletList();
+      showNotif('✅ Data berhasil di-pull!');
+    } else {
+      showNotif('❌ Pull gagal');
+    }
   } catch(e) {
-    console.warn('Sync wallets failed:', e);
+    showNotif('❌ Gagal koneksi ke Sheets');
   }
 }
 
