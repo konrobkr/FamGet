@@ -774,7 +774,12 @@ function renderTxList(){
   else if(txFilter==='in') txs=txs.filter(t=>t.type==='in');
   else if(txFilter==='Keluarga') txs=txs.filter(t=>t.owner==='Keluarga');
   else if(txFilter==='Pribadi') txs=txs.filter(t=>t.owner==='Pribadi');
-  txs.sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id);
+  txs.sort((a,b)=>{
+    const da=String(a.date||'').slice(0,10);
+    const db2=String(b.date||'').slice(0,10);
+    if(db2!==da) return db2.localeCompare(da);
+    return b.id-a.id;
+  });
   const el=document.getElementById('txList');
   if(!txs.length){
     el.innerHTML='<div class="empty"><div class="ei">📋</div><p>Belum ada transaksi.</p></div>';
@@ -782,7 +787,11 @@ function renderTxList(){
   }
   // Group by date
   const byDate={};
-  txs.forEach(t=>{ if(!byDate[t.date]) byDate[t.date]=[]; byDate[t.date].push(t); });
+  txs.forEach(t=>{
+    const dk=String(t.date||'').slice(0,10);
+    if(!byDate[dk]) byDate[dk]=[];
+    byDate[dk].push(t);
+  });
   el.innerHTML=Object.keys(byDate).sort().reverse().map(date=>{
     const items=byDate[date];
     const wallet=id=>{
@@ -889,9 +898,11 @@ function getPeriodRange(period){
   const now=new Date();
   let start,end;
   if(period==='week'){
+    // Monday-based week
     const day=now.getDay();
-    start=new Date(now); start.setDate(now.getDate()-day);
-    end=new Date(now); end.setDate(now.getDate()+(6-day));
+    const diffToMon=day===0?-6:1-day;
+    start=new Date(now); start.setDate(now.getDate()+diffToMon);
+    end=new Date(start); end.setDate(start.getDate()+6);
   } else if(period==='month'){
     start=new Date(now.getFullYear(),now.getMonth(),1);
     end=new Date(now.getFullYear(),now.getMonth()+1,0);
@@ -908,7 +919,9 @@ function renderDash(){
 
   // Normalize transactions — handle both ID and name-based wallet refs
   const txs=d.transactions.filter(t=>{
-    const dateStr=String(t.date||'').slice(0,10);
+    const dateStr=String(t.date||'').trim().slice(0,10);
+    // Validate it looks like a date
+    if(!dateStr.match(/^\d{4}-\d{2}-\d{2}$/)) return false;
     return dateStr>=start && dateStr<=end;
   });
 
@@ -1092,11 +1105,11 @@ async function pullFromSheets() {
       const d = db();
       // Merge: keep local wallets, replace transactions from Sheets
       const txs = data.transactions.map(r => {
-        // Fix date: use string slice only, avoid Date() constructor timezone shift
+        // Fix date: normalize to YYYY-MM-DD, avoid timezone shift
         let dateVal = String(r[0]||'').trim();
-        // If ISO format with time, just take date part directly
         if (dateVal.includes('T')) dateVal = dateVal.slice(0,10);
-        // If already YYYY-MM-DD, keep as is
+        // Validate format - if not YYYY-MM-DD, skip
+        if (!dateVal.match(/^\d{4}-\d{2}-\d{2}$/)) dateVal = '';
         // cols from sheets: Tanggal,Tipe,Owner,Wallet,WalletTujuan,Kategori,Nominal,Catatan,ID
         return {
           id: parseInt(r[8])||Date.now(),
