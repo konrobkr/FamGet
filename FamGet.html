@@ -1061,5 +1061,32 @@ function renderDash(){
     </div>
   `;
 }
+// ── MODAL ─────────────────────────────────────────────
+function closeModal(id){ document.getElementById(id).style.display='none'; }
+function openSettings(){ renderCatManage(); document.getElementById('settingsModal').style.display='block'; }
+function clearAllData(){ if(confirm('Hapus semua data FamGet?')){ localStorage.removeItem('famget_v1'); location.reload(); } }
 
+// ── NAV ───────────────────────────────────────────────
+function go(page){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.nt').forEach(t=>t.classList.remove('on'));
+  document.getElementById('pg-'+page).classList.add('on');
+  document.getElementById('tab-'+page).classList.add('on');
+  if(page==='wallet') renderWalletList();
+  if(page==='budget') renderBudgetList();
+  if(page==='tx') renderTxList();
+  if(page==='dash') renderDash();
+}
 
+function showNotif(msg){
+  const n=document.getElementById('notif');
+  n.textContent=msg; n.classList.add('show');
+  setTimeout(()=>n.classList.remove('show'),2500);
+}
+
+// ── START ─────────────────────────────────────────────
+init();
+setupNumberInputs();
+</script>
+</body>
+</html>
