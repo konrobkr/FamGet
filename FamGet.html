@@ -1085,6 +1085,90 @@ function showNotif(msg){
 }
 
 // ── START ─────────────────────────────────────────────
+// ── GOOGLE SHEETS SYNC ───────────────────────────────
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzwd2gMCEXww_MolTS5hQ7T6EHGPoPSguRmq9fKqqUlU-8n4W5pWTdIP-diFbjQ3U-g/exec';
+
+async function appendToSheets(tx, walletName, walletToName) {
+  try {
+    const params = new URLSearchParams({
+      type: 'append',
+      tanggal: tx.date,
+      tipe: tx.type==='out'?'Pengeluaran':tx.type==='in'?'Pemasukan':'Transfer',
+      owner: tx.owner||'-',
+      wallet: walletName||'-',
+      walletTo: walletToName||'-',
+      kategori: tx.cat||'-',
+      nominal: tx.amt,
+      catatan: tx.desc||'',
+      txid: tx.id
+    });
+    await fetch(SHEET_URL+'?'+params.toString(),{method:'GET',mode:'no-cors'});
+  } catch(e) {
+    console.warn('Append failed:',e);
+  }
+}
+
+async function pullFromSheets() {
+  try {
+    showNotif('⏳ Pulling dari Sheets...');
+    const resp = await fetch(SHEET_URL+'?type=pull');
+    const data = await resp.json();
+    if(data.status==='ok' && data.transactions) {
+      const d = db();
+      d.transactions = data.transactions.map(r => {
+        let dateVal = String(r[0]||'').trim().slice(0,10);
+        return {
+          id: parseInt(r[8])||Date.now(),
+          date: dateVal,
+          type: r[1]==='Pengeluaran'?'out':r[1]==='Pemasukan'?'in':'tf',
+          owner: r[2]||'-',
+          wallet: r[3]||'-',
+          walletTo: r[4]||'',
+          cat: r[5]||'-',
+          amt: parseFloat(r[6])||0,
+          desc: r[7]||''
+        };
+      }).filter(t=>t.date.match(/^\d{4}-\d{2}-\d{2}$/));
+      save(d);
+      recalcWalletBalances(true);
+      renderTxList();
+      renderDash();
+      renderWalletList();
+      showNotif('✅ Pull berhasil! '+d.transactions.length+' transaksi');
+    } else {
+      showNotif('❌ Pull gagal');
+    }
+  } catch(e) {
+    console.warn('Pull error:',e);
+    showNotif('❌ Gagal koneksi ke Sheets');
+  }
+}
+
+function recalcWalletBalances(silent=false) {
+  const d = db();
+  if(!d.wallets.length) { if(!silent) showNotif('Buat wallet dulu!'); return; }
+  d.wallets.forEach(w=>{ w.balance = w.initialBalance||0; });
+  d.transactions.forEach(tx=>{
+    const wi = d.wallets.findIndex(w=>
+      String(w.id)===String(tx.wallet)||w.name===String(tx.wallet)
+    );
+    if(wi<0) return;
+    if(tx.type==='out') d.wallets[wi].balance -= tx.amt;
+    else if(tx.type==='in') d.wallets[wi].balance += tx.amt;
+    else if(tx.type==='tf') {
+      d.wallets[wi].balance -= tx.amt;
+      const toi = d.wallets.findIndex(w=>
+        String(w.id)===String(tx.walletTo)||w.name===String(tx.walletTo)
+      );
+      if(toi>=0) d.wallets[toi].balance += tx.amt;
+    }
+  });
+  save(d);
+  renderWalletList();
+  if(!silent) showNotif('✅ Saldo berhasil dihitung ulang!');
+}
+
+
 init();
 setupNumberInputs();
 </script>
