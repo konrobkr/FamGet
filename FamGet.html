@@ -905,7 +905,13 @@ function getPeriodRange(period){
 function renderDash(){
   const d=db();
   const {start,end}=getPeriodRange(curPeriod);
-  const txs=d.transactions.filter(t=>t.date>=start&&t.date<=end);
+
+  // Normalize transactions — handle both ID and name-based wallet refs
+  const txs=d.transactions.filter(t=>{
+    const dateStr=String(t.date||'').slice(0,10);
+    return dateStr>=start && dateStr<=end;
+  });
+
   const totalOut=txs.filter(t=>t.type==='out').reduce((s,t)=>s+t.amt,0);
   const totalIn=txs.filter(t=>t.type==='in').reduce((s,t)=>s+t.amt,0);
   const famOut=txs.filter(t=>t.type==='out'&&t.owner==='Keluarga').reduce((s,t)=>s+t.amt,0);
@@ -914,14 +920,19 @@ function renderDash(){
 
   // Category breakdown
   const catTotals={};
-  txs.filter(t=>t.type==='out').forEach(t=>{ catTotals[t.cat]=(catTotals[t.cat]||0)+t.amt; });
+  txs.filter(t=>t.type==='out').forEach(t=>{
+    catTotals[t.cat]=(catTotals[t.cat]||0)+t.amt;
+  });
   const catSorted=Object.entries(catTotals).sort((a,b)=>b[1]-a[1]).slice(0,5);
   const maxCat=catSorted.length?catSorted[0][1]:1;
+
+  // Wallet totals from actual wallet data
+  const totalWallet=d.wallets.reduce((s,w)=>s+w.balance,0);
 
   const el=document.getElementById('dashContent');
   el.innerHTML=`
     <div class="hero">
-      <div class="hero-lbl">Saldo Bersih (${curPeriod==='week'?'Minggu Ini':curPeriod==='month'?'Bulan Ini':'Tahun Ini'})</div>
+      <div class="hero-lbl">Saldo Bersih · ${curPeriod==='week'?'Minggu Ini':curPeriod==='month'?'Bulan Ini':'Tahun Ini'}</div>
       <div class="hero-amt" style="color:${net>=0?'#10b981':'#ef4444'}">${net>=0?'+':''}${fmt(net)}</div>
       <div class="hero-sub">${fmt(totalIn)} masuk · ${fmt(totalOut)} keluar</div>
     </div>
@@ -931,18 +942,27 @@ function renderDash(){
       <div class="sc blue"><div class="sl">Keluarga</div><div class="sv">${fmtk(famOut)}</div></div>
       <div class="sc yellow"><div class="sl">Pribadi</div><div class="sv">${fmtk(priOut)}</div></div>
     </div>
+    <div class="slbl">Total Saldo Semua Wallet</div>
+    <div class="card" style="text-align:center;padding:16px">
+      <div style="font-size:24px;font-weight:700;color:#10b981">${fmt(totalWallet)}</div>
+      <div style="font-size:11px;color:#4a6080;margin-top:4px">${d.wallets.length} wallet aktif</div>
+    </div>
     <div class="slbl">Top Kategori</div>
     <div class="card">
       ${catSorted.length?catSorted.map(([cat,amt])=>{
-        const pct=Math.round(amt/totalOut*100);
+        const pct=Math.round(amt/totalOut*100)||0;
         return `<div class="budget-item">
           <div class="budget-top">
             <div class="budget-cat">📌 ${cat}</div>
             <div class="budget-amts">${fmt(amt)} <span style="color:#4a6080">${pct}%</span></div>
           </div>
-          <div class="prog-wrap"><div class="prog-track"><div class="prog-fill safe" style="width:${Math.round(amt/maxCat*100)}%"></div></div></div>
+          <div class="prog-wrap">
+            <div class="prog-track">
+              <div class="prog-fill safe" style="width:${Math.round(amt/maxCat*100)}%"></div>
+            </div>
+          </div>
         </div>`;
-      }).join(''):'<div style="color:#4a6080;font-size:12px;text-align:center;padding:10px">Belum ada data</div>'}
+      }).join(''):'<div style="color:#4a6080;font-size:12px;text-align:center;padding:10px">Belum ada data periode ini</div>'}
     </div>
     <div class="slbl">Keluarga vs Pribadi</div>
     <div class="card">
@@ -950,21 +970,33 @@ function renderDash(){
         <div class="bc-col">
           <div class="bc-amt">${fmtk(famOut)}</div>
           <div style="flex:1;display:flex;align-items:flex-end;width:100%">
-            <div class="bc-bar" style="height:${famOut||priOut?Math.round(famOut/Math.max(famOut,priOut)*70):0}px;background:linear-gradient(180deg,#3b82f6,#1d4ed8)"></div>
+            <div class="bc-bar" style="height:${famOut||priOut?Math.round(famOut/Math.max(famOut,priOut)*70):2}px;background:linear-gradient(180deg,#3b82f6,#1d4ed8)"></div>
           </div>
           <div class="bc-lbl">👨‍👩‍👧 Keluarga</div>
         </div>
         <div class="bc-col">
           <div class="bc-amt">${fmtk(priOut)}</div>
           <div style="flex:1;display:flex;align-items:flex-end;width:100%">
-            <div class="bc-bar" style="height:${famOut||priOut?Math.round(priOut/Math.max(famOut,priOut)*70):0}px;background:linear-gradient(180deg,#a855f7,#7c3aed)"></div>
+            <div class="bc-bar" style="height:${famOut||priOut?Math.round(priOut/Math.max(famOut,priOut)*70):2}px;background:linear-gradient(180deg,#a855f7,#7c3aed)"></div>
           </div>
           <div class="bc-lbl">🙋 Pribadi</div>
         </div>
       </div>
     </div>
+    <div class="slbl">Saldo per Wallet</div>
+    <div class="card">
+      ${d.wallets.length?d.wallets.map(w=>`
+        <div class="budget-item">
+          <div class="budget-top">
+            <div class="budget-cat">${w.icon||'💳'} ${w.name}</div>
+            <div style="font-size:13px;font-weight:600;color:${w.balance>=0?'#10b981':'#ef4444'}">${fmt(w.balance)}</div>
+          </div>
+        </div>
+      `).join(''):'<div style="color:#4a6080;font-size:12px;text-align:center;padding:10px">Belum ada wallet</div>'}
+    </div>
   `;
 }
+
 
 // ── MODAL ─────────────────────────────────────────────
 function closeModal(id){ document.getElementById(id).style.display='none'; }
