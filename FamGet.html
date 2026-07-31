@@ -12,42 +12,35 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden;background:#0a1628}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#e8f0fe}
-
 #app{display:flex;flex-direction:column;height:100vh;height:100dvh;background:#0a1628;position:relative;overflow:hidden}
-#app::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 0%,rgba(16,185,129,0.08) 0%,transparent 60%),radial-gradient(ellipse at 80% 100%,rgba(59,130,246,0.06) 0%,transparent 60%);pointer-events:none;z-index:0}
+#app::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 0%,rgba(16,185,129,0.07) 0%,transparent 60%),radial-gradient(ellipse at 80% 100%,rgba(59,130,246,0.05) 0%,transparent 60%);pointer-events:none;z-index:0}
 
-/* HEADER */
 .hdr{background:linear-gradient(135deg,#0d1f3c,#0a1628);border-bottom:1px solid rgba(16,185,129,0.2);padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 12px;position:relative;z-index:10;flex-shrink:0}
 .hdr-row{display:flex;align-items:center;justify-content:space-between}
 .hdr-logo{display:flex;align-items:center;gap:10px}
 .logo-icon{width:34px;height:34px;background:linear-gradient(135deg,#10b981,#059669);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 .hdr-title{font-size:18px;font-weight:700;color:#fff;letter-spacing:1px}
 .hdr-sub{font-size:10px;color:#10b981;letter-spacing:2px;text-transform:uppercase}
-.hdr-settings{width:34px;height:34px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:#10b981;border:none}
+.hdr-settings{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;border:none;background:rgba(16,185,129,0.1)}
 
-/* NAV */
 .nav{display:flex;background:#0d1f3c;border-bottom:1px solid rgba(16,185,129,0.15);position:relative;z-index:10;flex-shrink:0}
 .nt{flex:1;padding:8px 2px 6px;text-align:center;font-size:9px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:#4a6080;cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;transition:all 0.2s}
 .nt .ni{display:block;font-size:16px;margin-bottom:2px}
 .nt.on{color:#10b981;border-bottom-color:#10b981;background:rgba(16,185,129,0.06)}
 
-/* PAGES */
 .pages{flex:1;overflow:hidden;position:relative;z-index:1}
 .pg{display:none;height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 14px calc(env(safe-area-inset-bottom,20px) + 24px)}
 .pg.on{display:block}
 .pg::-webkit-scrollbar{width:2px}
 .pg::-webkit-scrollbar-thumb{background:rgba(16,185,129,0.2);border-radius:2px}
 
-/* LABELS */
 .slbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#10b981;margin:14px 0 7px;display:flex;align-items:center;gap:8px}
 .slbl::after{content:'';flex:1;height:1px;background:rgba(16,185,129,0.15)}
 .slbl:first-child{margin-top:2px}
 
-/* CARDS */
 .card{background:rgba(13,31,60,0.9);border:1px solid rgba(16,185,129,0.12);border-radius:12px;padding:14px;margin-bottom:10px;position:relative}
-.card::before{content:'';position:absolute;top:0;left:20px;right:20px;height:1px;background:linear-gradient(90deg,transparent,rgba(16,185,129,0.3),transparent)}
+.card::before{content:'';position:absolute;top:0;left:20px;right:20px;height:1px;background:linear-gradient(90deg,transparent,rgba(16,185,129,0.25),transparent)}
 
-/* FORM */
 .fl{display:flex;gap:8px}
 .fl .fg{flex:1;min-width:0}
 .fg{margin-bottom:10px}
@@ -58,61 +51,55 @@ select option{background:#0d1f3c}
 input[type=number]{-moz-appearance:textfield}
 input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
 
-/* TYPE TOGGLE */
 .type-toggle{display:flex;gap:6px;margin-bottom:12px}
 .tt{flex:1;padding:10px;border-radius:10px;font-size:13px;font-weight:600;border:1px solid rgba(16,185,129,0.2);background:transparent;color:#4a6080;cursor:pointer;text-align:center;transition:all 0.2s}
 .tt.sel-out{background:rgba(239,68,68,0.12);border-color:#ef4444;color:#ef4444}
 .tt.sel-in{background:rgba(16,185,129,0.12);border-color:#10b981;color:#10b981}
 .tt.sel-tf{background:rgba(59,130,246,0.12);border-color:#3b82f6;color:#3b82f6}
 
-/* OWNER TOGGLE */
 .owner-toggle{display:flex;gap:6px;margin-bottom:10px}
 .ot{flex:1;padding:8px;border-radius:8px;font-size:12px;font-weight:600;border:1px solid rgba(16,185,129,0.15);background:transparent;color:#4a6080;cursor:pointer;text-align:center;transition:all 0.2s}
 .ot.sel{background:rgba(16,185,129,0.12);border-color:#10b981;color:#10b981}
 
-/* BUTTONS */
-.btn-p{width:100%;padding:13px;background:linear-gradient(135deg,#10b981,#059669);border:none;border-radius:10px;color:#fff;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;-webkit-appearance:none}
+.btn-p{width:100%;padding:13px;background:linear-gradient(135deg,#10b981,#059669);border:none;border-radius:10px;color:#fff;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;-webkit-appearance:none;position:relative;overflow:hidden}
+.btn-p::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);animation:sh 2.5s infinite}
+@keyframes sh{to{left:160%}}
 .btn-s{padding:9px 14px;background:transparent;border:1px solid rgba(16,185,129,0.3);border-radius:8px;color:#10b981;font-size:12px;letter-spacing:1px;cursor:pointer;-webkit-appearance:none}
-.btn-sm{padding:6px 10px;background:transparent;border:1px solid rgba(16,185,129,0.2);border-radius:6px;color:#10b981;font-size:12px;cursor:pointer;-webkit-appearance:none}
-.btn-danger{padding:6px 10px;background:transparent;border:1px solid rgba(239,68,68,0.3);border-radius:6px;color:#ef4444;font-size:12px;cursor:pointer}
+.btn-danger{padding:9px 14px;background:transparent;border:1px solid rgba(239,68,68,0.3);border-radius:8px;color:#ef4444;font-size:12px;cursor:pointer}
 
-/* HERO CARD */
 .hero{background:linear-gradient(135deg,#0d3320,#0a1628);border:1px solid rgba(16,185,129,0.25);border-radius:14px;padding:18px;margin-bottom:14px;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-30px;right:-30px;width:100px;height:100px;background:radial-gradient(circle,rgba(16,185,129,0.15),transparent);border-radius:50%}
-.hero-lbl{font-size:10px;color:#6b8ab0;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
-.hero-amt{font-size:32px;font-weight:700;color:#fff;letter-spacing:-1px}
-.hero-sub{font-size:12px;color:#10b981;margin-top:4px}
+.hero-lbl{font-size:10px;color:#6b8ab0;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;position:relative}
+.hero-amt{font-size:30px;font-weight:700;color:#fff;position:relative}
+.hero-sub{font-size:12px;color:#10b981;margin-top:4px;position:relative}
 
-/* STAT GRID */
 .sgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-.sc{background:rgba(13,31,60,0.95);border:1px solid rgba(16,185,129,0.1);border-radius:10px;padding:12px;text-align:center}
+.sc{background:rgba(13,31,60,0.95);border:1px solid rgba(16,185,129,0.1);border-radius:10px;padding:11px;text-align:center}
 .sc .sl{font-size:9px;color:#4a6080;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px}
-.sc .sv{font-size:17px;font-weight:700}
+.sc .sv{font-size:16px;font-weight:700}
 .sc.green .sv{color:#10b981}
 .sc.red .sv{color:#ef4444}
 .sc.blue .sv{color:#3b82f6}
 .sc.yellow .sv{color:#f59e0b}
 
-/* WALLET CARD */
-.wcard{background:rgba(13,31,60,0.95);border:1px solid rgba(16,185,129,0.15);border-radius:12px;padding:14px;margin-bottom:8px;position:relative}
-.wcard-top{display:flex;justify-content:space-between;align-items:flex-start}
-.wcard-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.wcard-name{font-size:14px;font-weight:600;color:#fff;margin-bottom:2px}
-.wcard-type{font-size:10px;color:#6b8ab0;text-transform:uppercase;letter-spacing:1px}
-.wcard-bal{font-size:20px;font-weight:700;color:#10b981;margin-top:8px}
-.wcard-sub{font-size:10px;color:#4a6080;margin-top:2px}
-.wcard-btns{display:flex;gap:6px;margin-top:10px}
+/* WALLET CARD — read only */
+.wcard{background:rgba(13,31,60,0.95);border:1px solid rgba(16,185,129,0.15);border-radius:12px;padding:14px;margin-bottom:8px;display:flex;align-items:center;gap:12px}
+.wcard-icon{width:42px;height:42px;border-radius:12px;background:rgba(16,185,129,0.1);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.wcard-info{flex:1;min-width:0}
+.wcard-name{font-size:14px;font-weight:600;color:#fff}
+.wcard-type{font-size:10px;color:#6b8ab0;text-transform:uppercase;letter-spacing:1px;margin-top:1px}
+.wcard-right{text-align:right;flex-shrink:0}
+.wcard-bal{font-size:16px;font-weight:700;color:#10b981}
+.wcard-updated{font-size:9px;color:#4a6080;margin-top:2px}
 
-/* PROGRESS BAR */
 .prog-wrap{margin-top:6px}
-.prog-track{height:6px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden}
+.prog-track{height:5px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden}
 .prog-fill{height:100%;border-radius:3px;transition:width 0.5s}
 .prog-fill.safe{background:linear-gradient(90deg,#059669,#10b981)}
 .prog-fill.warn{background:linear-gradient(90deg,#d97706,#f59e0b)}
 .prog-fill.over{background:linear-gradient(90deg,#dc2626,#ef4444)}
 .prog-lbl{display:flex;justify-content:space-between;font-size:10px;color:#6b8ab0;margin-top:4px}
 
-/* TRANSACTION LIST */
 .tx-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(16,185,129,0.06)}
 .tx-item:last-child{border:none}
 .tx-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
@@ -131,7 +118,6 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .tx-amt.tf{color:#3b82f6}
 .tx-actions{display:flex;gap:4px}
 
-/* BUDGET ITEM */
 .budget-item{margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid rgba(16,185,129,0.07)}
 .budget-item:last-child{border:none;margin-bottom:0;padding-bottom:0}
 .budget-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
@@ -139,115 +125,50 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .budget-amts{font-size:12px;color:#6b8ab0;text-align:right}
 .budget-spent{font-size:13px;font-weight:600}
 
-/* PERIOD TOGGLE */
 .period-toggle{display:flex;gap:4px;margin-bottom:14px;background:rgba(13,31,60,0.8);border:1px solid rgba(16,185,129,0.12);border-radius:10px;padding:3px}
 .pt{flex:1;padding:7px;text-align:center;font-size:11px;font-weight:600;color:#4a6080;cursor:pointer;border-radius:8px;border:none;background:none;transition:all 0.2s}
 .pt.on{background:rgba(16,185,129,0.15);color:#10b981}
 
-/* BAR CHART */
 .bar-chart{display:flex;align-items:flex-end;gap:6px;height:90px;margin-top:8px}
 .bc-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
 .bc-bar{width:100%;border-radius:4px 4px 0 0;min-height:2px;transition:height 0.6s}
 .bc-lbl{font-size:9px;color:#4a6080;text-align:center}
 .bc-amt{font-size:9px;color:#8ab0d0;text-align:center}
 
-/* FILTER ROW */
 .filter-row{display:flex;gap:6px;margin-bottom:10px;overflow-x:auto;padding-bottom:2px}
 .filter-row::-webkit-scrollbar{display:none}
 .fpill{padding:6px 12px;border-radius:20px;font-size:11px;border:1px solid rgba(16,185,129,0.2);background:transparent;color:#6b8ab0;cursor:pointer;white-space:nowrap;-webkit-appearance:none}
 .fpill.on{background:rgba(16,185,129,0.12);border-color:#10b981;color:#10b981}
 
-/* NOTIF */
 .notif{position:fixed;top:80px;left:50%;transform:translateX(-50%);background:#10b981;color:#fff;padding:10px 22px;border-radius:20px;font-size:13px;font-weight:600;z-index:999;opacity:0;transition:opacity 0.3s;white-space:nowrap;pointer-events:none}
 .notif.show{opacity:1}
 
-/* MODAL */
 .modal{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,10,0.88);overflow-y:auto;padding:20px 14px}
 .modal-box{background:#0d1f3c;border:1px solid rgba(16,185,129,0.25);border-radius:14px;padding:16px;max-width:480px;margin:auto}
 .modal-title{font-size:15px;font-weight:700;color:#fff;letter-spacing:1px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
 
-.empty{text-align:center;padding:36px 16px;color:#2a4060}
+.empty{text-align:center;padding:36px 16px}
 .empty .ei{font-size:36px;margin-bottom:10px}
 .empty p{font-size:13px;line-height:1.7;color:#4a6080}
 
 .hint{background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.15);border-radius:8px;padding:8px 12px;font-size:12px;color:#10b981;margin-bottom:10px}
 .hint.warn{background:rgba(245,158,11,0.06);border-color:rgba(245,158,11,0.2);color:#f59e0b}
 .hint.danger{background:rgba(239,68,68,0.06);border-color:rgba(239,68,68,0.2);color:#ef4444}
-
-.tgl{width:44px;height:26px;background:#1a3050;border-radius:13px;position:relative;cursor:pointer;border:none;flex-shrink:0}
-.tgl.on{background:#10b981}
-.tgl::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:left 0.2s}
-.tgl.on::after{left:21px}
-.trow{display:flex;align-items:center;justify-content:space-between;padding:8px 0}
+.hint.info{background:rgba(59,130,246,0.06);border-color:rgba(59,130,246,0.2);color:#3b82f6}
 
 .cat-list{display:flex;flex-wrap:wrap;gap:6px}
 .cat-tag{display:inline-flex;align-items:center;gap:4px;padding:6px 10px;border-radius:8px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.15);font-size:12px;color:#10b981}
-.cat-tag button{background:none;border:none;color:#6b8ab0;cursor:pointer;font-size:12px;padding:0;line-height:1}
+.cat-tag button{background:none;border:none;color:#6b8ab0;cursor:pointer;font-size:12px;padding:0}
+
+.pull-banner{background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(13,31,60,0.9));border:1px solid rgba(59,130,246,0.25);border-radius:10px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.pull-banner-txt{font-size:12px;color:#93c5fd}
+.pull-banner-sub{font-size:10px;color:#4a6080;margin-top:2px}
+
+.wallet-total{background:linear-gradient(135deg,#0d3320,#0a2040);border:1px solid rgba(16,185,129,0.3);border-radius:14px;padding:16px;margin-bottom:12px;text-align:center}
+.wallet-total .wt-lbl{font-size:10px;color:#6b8ab0;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.wallet-total .wt-amt{font-size:28px;font-weight:700;color:#10b981}
+.wallet-total .wt-sub{font-size:11px;color:#4a6080;margin-top:4px}
 </style>
-
-<script>
-if('serviceWorker' in navigator){
-  const swCode = `
-const CACHE='famget-v1';
-self.addEventListener('install',e=>{
-  self.skipWaiting();
-});
-self.addEventListener('activate',e=>{
-  e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))));
-  self.clients.claim();
-});
-self.addEventListener('fetch',e=>{
-  e.respondWith(caches.match(e.request).then(cached=>{
-    const fresh=fetch(e.request).then(res=>{
-      if(res&&res.status===200){
-        const clone=res.clone();
-        caches.open(CACHE).then(c=>c.put(e.request,clone));
-      }
-      return res;
-    }).catch(()=>cached);
-    return cached||fresh;
-  }));
-});
-  `;
-  const blob=new Blob([swCode],{type:'application/javascript'});
-  const url=URL.createObjectURL(blob);
-  navigator.serviceWorker.register(url,{scope:'./'}).catch(()=>{});
-}
-</script>
-
-<script>
-// Auto-format number inputs with thousand separator
-function setupNumberInputs(){
-  document.querySelectorAll('input[type=number]').forEach(inp=>{
-    // Replace with text input for formatting
-    const newInp=document.createElement('input');
-    newInp.type='text';
-    newInp.inputMode='numeric';
-    newInp.id=inp.id;
-    newInp.placeholder=inp.placeholder||'0';
-    newInp.className=inp.className;
-    newInp.style.cssText=inp.style.cssText;
-    newInp.dataset.raw='0';
-    newInp.addEventListener('input',function(){
-      const raw=this.value.replace(/[^0-9]/g,'');
-      this.dataset.raw=raw||'0';
-      this.value=raw?parseInt(raw).toLocaleString('id-ID'):'';
-    });
-    newInp.getRawValue=function(){ return parseFloat(this.dataset.raw)||0; };
-    inp.parentNode.replaceChild(newInp,inp);
-  });
-}
-
-// Override parseFloat for formatted inputs
-const _origGetById=document.getElementById.bind(document);
-function getRaw(id){
-  const el=_origGetById(id);
-  if(!el) return 0;
-  if(el.dataset&&el.dataset.raw!==undefined) return parseFloat(el.dataset.raw)||0;
-  return parseFloat(el.value)||0;
-}
-</script>
-
 </head>
 <body>
 <div id="app">
@@ -281,9 +202,7 @@ function getRaw(id){
     <button class="tt" onclick="selType(this,'in')" id="tt-in">⬇ Pemasukan</button>
     <button class="tt" onclick="selType(this,'tf')" id="tt-tf">↔ Transfer</button>
   </div>
-
   <div class="card">
-    <!-- Owner (hidden for 'in') -->
     <div id="ownerRow" class="fg">
       <div class="flbl">Untuk</div>
       <div class="owner-toggle">
@@ -291,42 +210,36 @@ function getRaw(id){
         <button class="ot" onclick="selOwner(this,'Pribadi')" id="ot-pri">🙋 Pribadi</button>
       </div>
     </div>
-
     <div class="fl">
-      <div class="fg" style="flex:1">
+      <div class="fg">
         <div class="flbl">Tanggal</div>
         <input type="date" id="txDate">
       </div>
-      <div class="fg" style="flex:1">
+      <div class="fg">
         <div class="flbl">Wallet</div>
         <select id="txWallet"></select>
       </div>
     </div>
-
     <div id="tfToRow" class="fg" style="display:none">
       <div class="flbl">Ke Wallet</div>
       <select id="txWalletTo"></select>
     </div>
-
     <div id="catRow" class="fg">
       <div class="flbl">Kategori</div>
       <div style="display:flex;gap:6px">
-        <select id="txCat" style="flex:1" onchange="checkNewCat()"></select>
-        <button class="btn-sm" onclick="addCatFromInput()" style="white-space:nowrap">+ Baru</button>
+        <select id="txCat" style="flex:1"></select>
+        <button class="btn-s" onclick="addCatFromInput()">+ Baru</button>
       </div>
       <input type="text" id="newCatInput" placeholder="Nama kategori baru..." style="display:none;margin-top:6px" onkeydown="if(event.key==='Enter')saveCat()">
     </div>
-
     <div class="fg">
       <div class="flbl">Nominal (Rp)</div>
       <input type="number" id="txAmt" placeholder="0" inputmode="numeric">
     </div>
-
     <div class="fg">
       <div class="flbl">Catatan</div>
       <input type="text" id="txDesc" placeholder="Opsional..." autocomplete="off">
     </div>
-
     <button class="btn-p" onclick="saveTx()">💾 Simpan</button>
   </div>
 </div>
@@ -343,13 +256,15 @@ function getRaw(id){
   <div id="txList"></div>
 </div>
 
-<!-- WALLET -->
+<!-- WALLET — read only -->
 <div id="pg-wallet" class="pg">
-  <button class="btn-p" onclick="openWalletModal()" style="margin-bottom:14px">+ Tambah Wallet</button>
-  <div id="walletSummary" class="hero" style="margin-bottom:14px">
-    <div class="hero-lbl">Total Saldo Semua Wallet</div>
-    <div class="hero-amt" id="totalBalAmt">Rp 0</div>
-    <div class="hero-sub" id="totalBalSub">0 wallet aktif</div>
+  <div class="hint info" style="margin-bottom:12px">
+    ℹ️ Wallet dikelola di Google Sheets. Gunakan Pull untuk update data terbaru.
+  </div>
+  <div class="wallet-total">
+    <div class="wt-lbl">Total Saldo Semua Wallet</div>
+    <div class="wt-amt" id="walletTotalAmt">Rp 0</div>
+    <div class="wt-sub" id="walletTotalSub">Pull dari Sheets untuk update</div>
   </div>
   <div id="walletList"></div>
 </div>
@@ -370,37 +285,12 @@ function getRaw(id){
   <div id="dashContent"></div>
 </div>
 
-</div><!-- /pages -->
-
-<!-- WALLET MODAL -->
-<div class="modal" id="walletModal">
-  <div class="modal-box">
-    <div class="modal-title">
-      <span id="walletModalTitle">Tambah Wallet</span>
-      <button class="btn-sm" onclick="closeModal('walletModal')">✕</button>
-    </div>
-    <div class="fg"><div class="flbl">Nama Wallet</div><input type="text" id="wName" placeholder="e.g. BRI, Dana, Kas Rumah"></div>
-    <div class="fg"><div class="flbl">Tipe</div>
-      <select id="wType">
-        <option>Bank</option><option>E-Wallet</option><option>Kas Tunai</option><option>Tabungan</option><option>Investasi</option><option>Lainnya</option>
-      </select>
-    </div>
-    <div class="fg"><div class="flbl">Saldo Awal (Rp)</div><input type="number" id="wBal" placeholder="0" inputmode="numeric"></div>
-    <div class="fg"><div class="flbl">Icon (emoji)</div><input type="text" id="wIcon" placeholder="🏦" maxlength="2"></div>
-    <div style="display:flex;gap:8px;margin-top:4px">
-      <button class="btn-p" onclick="saveWallet()" style="flex:2">Simpan</button>
-      <button class="btn-s" onclick="closeModal('walletModal')">Batal</button>
-    </div>
-  </div>
 </div>
 
 <!-- BUDGET MODAL -->
 <div class="modal" id="budgetModal">
   <div class="modal-box">
-    <div class="modal-title">
-      <span>Set Budget</span>
-      <button class="btn-sm" onclick="closeModal('budgetModal')">✕</button>
-    </div>
+    <div class="modal-title"><span>Set Budget</span><button class="btn-s" onclick="closeModal('budgetModal')">✕</button></div>
     <div class="fg"><div class="flbl">Kategori</div><select id="bCat"></select></div>
     <div class="fg"><div class="flbl">Limit per Bulan (Rp)</div><input type="number" id="bLimit" placeholder="0" inputmode="numeric"></div>
     <div class="fg"><div class="flbl">Untuk</div>
@@ -416,19 +306,15 @@ function getRaw(id){
 <!-- SETTINGS MODAL -->
 <div class="modal" id="settingsModal">
   <div class="modal-box">
-    <div class="modal-title">
-      <span>⚙️ Settings</span>
-      <button class="btn-sm" onclick="closeModal('settingsModal')">✕</button>
-    </div>
+    <div class="modal-title"><span>⚙️ Settings</span><button class="btn-s" onclick="closeModal('settingsModal')">✕</button></div>
+    <div class="slbl">Sync</div>
+    <button class="btn-p" style="margin-bottom:8px;background:linear-gradient(135deg,#3b82f6,#1d4ed8)" onclick="pullAll();closeModal('settingsModal')">☁️ Pull Data dari Sheets</button>
     <div class="slbl">Kategori</div>
     <div id="catManageList" class="cat-list" style="margin-bottom:12px"></div>
     <div style="display:flex;gap:6px;margin-bottom:14px">
       <input type="text" id="newCatSetting" placeholder="Tambah kategori..." style="flex:1">
       <button class="btn-s" onclick="addCatFromSettings()">Tambah</button>
     </div>
-    <div class="slbl">Sync</div>
-    <button class="btn-p" style="margin-bottom:8px;background:linear-gradient(135deg,#3b82f6,#1d4ed8)" onclick="pullFromSheets();closeModal('settingsModal')">☁️ Pull Data dari Sheets</button>
-    <button class="btn-p" style="margin-bottom:12px;background:linear-gradient(135deg,#7c3aed,#5b21b6)" onclick="recalcWalletBalances();closeModal('settingsModal')">🔄 Recalculate Saldo Wallet</button>
     <div class="slbl">Data</div>
     <button class="btn-danger" style="width:100%;padding:11px;border-radius:8px" onclick="clearAllData()">🗑 Hapus Semua Data</button>
   </div>
@@ -437,10 +323,7 @@ function getRaw(id){
 <!-- EDIT TX MODAL -->
 <div class="modal" id="editTxModal">
   <div class="modal-box">
-    <div class="modal-title">
-      <span>Edit Transaksi</span>
-      <button class="btn-sm" onclick="closeModal('editTxModal')">✕</button>
-    </div>
+    <div class="modal-title"><span>Edit Transaksi</span><button class="btn-s" onclick="closeModal('editTxModal')">✕</button></div>
     <div class="fg"><div class="flbl">Tanggal</div><input type="date" id="etDate"></div>
     <div class="fg"><div class="flbl">Kategori</div><select id="etCat"></select></div>
     <div class="fg"><div class="flbl">Nominal</div><input type="number" id="etAmt" inputmode="numeric"></div>
@@ -456,30 +339,95 @@ function getRaw(id){
 </div>
 
 <script>
-// ── DB ──────────────────────────────────────────────
-function db(){ return JSON.parse(localStorage.getItem('famget_v1')||'{"wallets":[],"transactions":[],"budgets":[],"categories":["Makanan","Transportasi","Tagihan","Belanja","Kesehatan","Pendidikan","Hiburan","Tabungan","Lain-lain"]}'); }
-function save(d){ localStorage.setItem('famget_v1',JSON.stringify(d)); }
+const SHEET_URL='https://script.google.com/macros/s/AKfycbzwd2gMCEXww_MolTS5hQ7T6EHGPoPSguRmq9fKqqUlU-8n4W5pWTdIP-diFbjQ3U-g/exec';
+
+// ── DB ──────────────────────────────────────────────────
+const DB_KEY='famget_v2';
+function db(){
+  return JSON.parse(localStorage.getItem(DB_KEY)||JSON.stringify({
+    wallets:[],
+    transactions:[],
+    budgets:[],
+    categories:["Makanan","Transportasi","Tagihan","Belanja","Kesehatan","Pendidikan","Hiburan","Tabungan","Sedekah","Lain-lain"],
+    lastPull:null
+  }));
+}
+function save(d){ localStorage.setItem(DB_KEY,JSON.stringify(d)); }
 
 function fmt(n){ return 'Rp '+Math.round(n).toLocaleString('id-ID'); }
-function fmtk(n){ if(Math.abs(n)>=1000000) return 'Rp '+(n/1000000).toFixed(1)+'jt'; if(Math.abs(n)>=1000) return 'Rp '+(n/1000).toFixed(0)+'k'; return fmt(n); }
+function fmtk(n){
+  const abs=Math.abs(n);
+  if(abs>=1000000000) return 'Rp '+(n/1000000000).toFixed(1)+'M';
+  if(abs>=1000000) return 'Rp '+(n/1000000).toFixed(1)+'jt';
+  if(abs>=1000) return 'Rp '+(n/1000).toFixed(0)+'k';
+  return fmt(n);
+}
 
-// ── STATE ────────────────────────────────────────────
-let curType='out', curOwner='Keluarga', curPeriod='month', txFilter='all', editTxId=null, editWalletId=null;
+// ── WALLET SALDO — hitung dari transaksi lokal (Opsi A) ──
+function calcWalletBalances(){
+  const d=db();
+  const balances={};
+  // Init dari saldo awal
+  d.wallets.forEach(w=>{
+    balances[w.nama]=(w.awal||0);
+  });
+  // Hitung dari transaksi
+  d.transactions.forEach(tx=>{
+    const wName=String(tx.wallet||'');
+    const wTo=String(tx.walletTo||'');
+    if(tx.type==='out') balances[wName]=(balances[wName]||0)-tx.amt;
+    else if(tx.type==='in') balances[wName]=(balances[wName]||0)+tx.amt;
+    else if(tx.type==='tf'){
+      balances[wName]=(balances[wName]||0)-tx.amt;
+      if(wTo) balances[wTo]=(balances[wTo]||0)+tx.amt;
+    }
+  });
+  return balances;
+}
 
-// ── INIT ─────────────────────────────────────────────
+// ── FORMAT NUMBER INPUT ──────────────────────────────────
+function setupNumberInputs(){
+  document.querySelectorAll('input[type=number]').forEach(inp=>{
+    const ni=document.createElement('input');
+    ni.type='text'; ni.inputMode='numeric';
+    ni.id=inp.id; ni.placeholder=inp.placeholder||'0';
+    ni.className=inp.className; ni.style.cssText=inp.style.cssText;
+    ni.dataset.raw='0';
+    ni.addEventListener('input',function(){
+      const raw=this.value.replace(/[^0-9]/g,'');
+      this.dataset.raw=raw||'0';
+      this.value=raw?parseInt(raw).toLocaleString('id-ID'):'';
+    });
+    inp.parentNode.replaceChild(ni,inp);
+  });
+}
+
+function getRaw(id){
+  const el=document.getElementById(id);
+  if(!el) return 0;
+  if(el.dataset&&el.dataset.raw!==undefined&&el.dataset.raw!=='0'&&el.dataset.raw!==''){
+    return parseFloat(el.dataset.raw)||0;
+  }
+  const raw=String(el.value).replace(/\./g,'').replace(/,/g,'').replace(/[^0-9]/g,'');
+  return parseFloat(raw)||0;
+}
+
+// ── STATE ────────────────────────────────────────────────
+let curType='out', curOwner='Keluarga', curPeriod='month', txFilter='all', editTxId=null;
+let _savingTx=false;
+
+// ── INIT ────────────────────────────────────────────────
 function init(){
-  const today=new Date().toISOString().slice(0,10);
-  document.getElementById('txDate').value=today;
+  document.getElementById('txDate').value=new Date().toISOString().slice(0,10);
   populateWalletSelects();
   populateCatSelect();
 }
 
-// ── TYPE / OWNER ─────────────────────────────────────
+// ── TYPE / OWNER ─────────────────────────────────────────
 function selType(el,type){
   curType=type;
   ['out','in','tf'].forEach(t=>{
-    const btn=document.getElementById('tt-'+t);
-    btn.className='tt'+(t===type?' sel-'+t:'');
+    document.getElementById('tt-'+t).className='tt'+(t===type?' sel-'+t:'');
   });
   document.getElementById('ownerRow').style.display=type==='in'?'none':'block';
   document.getElementById('catRow').style.display=type==='tf'?'none':'block';
@@ -492,38 +440,42 @@ function selOwner(el,owner){
   el.classList.add('sel');
 }
 
-// ── WALLET SELECTS ────────────────────────────────────
+// ── WALLET SELECTS ───────────────────────────────────────
 function populateWalletSelects(){
   const d=db();
-  const wallets=d.wallets;
-  ['txWallet','txWalletTo','etWallet'].forEach(id=>{
+  ['txWallet','txWalletTo'].forEach(id=>{
     const sel=document.getElementById(id);
     if(!sel) return;
     const cur=sel.value;
     sel.innerHTML='<option value="">— Pilih Wallet —</option>';
-    wallets.forEach(w=>{ const o=document.createElement('option'); o.value=w.id; o.textContent=`${w.icon||'💳'} ${w.name}`; sel.appendChild(o); });
+    d.wallets.forEach(w=>{
+      const o=document.createElement('option');
+      o.value=w.nama;
+      o.textContent=`${w.icon||'💳'} ${w.nama}`;
+      sel.appendChild(o);
+    });
     if(cur) sel.value=cur;
   });
 }
 
-// ── CAT SELECT ────────────────────────────────────────
+// ── CAT SELECT ───────────────────────────────────────────
 function populateCatSelect(targetId='txCat'){
   const d=db();
   const sel=document.getElementById(targetId);
   if(!sel) return;
   const cur=sel.value;
   sel.innerHTML='';
-  d.categories.forEach(c=>{ const o=document.createElement('option'); o.value=c; o.textContent=c; sel.appendChild(o); });
+  d.categories.forEach(c=>{
+    const o=document.createElement('option');
+    o.value=c; o.textContent=c;
+    sel.appendChild(o);
+  });
   if(cur) sel.value=cur;
 }
 
-function checkNewCat(){
-  const sel=document.getElementById('txCat');
-}
-
 function addCatFromInput(){
-  document.getElementById('newCatInput').style.display='block';
-  document.getElementById('newCatInput').focus();
+  const inp=document.getElementById('newCatInput');
+  inp.style.display='block'; inp.focus();
 }
 
 function saveCat(){
@@ -560,146 +512,56 @@ function deleteCat(cat){
 
 function renderCatManage(){
   const d=db();
-  const el=document.getElementById('catManageList');
-  el.innerHTML=d.categories.map(c=>`<div class="cat-tag">${c}<button onclick="deleteCat('${c}')">✕</button></div>`).join('');
+  document.getElementById('catManageList').innerHTML=
+    d.categories.map(c=>`<div class="cat-tag">${c}<button onclick="deleteCat('${c}')">✕</button></div>`).join('');
 }
 
-// ── SAVE TRANSACTION ──────────────────────────────────
+// ── SAVE TRANSACTION ─────────────────────────────────────
 function saveTx(){
+  if(_savingTx) return;
+  _savingTx=true;
+  setTimeout(()=>{ _savingTx=false; },3000);
+
   const d=db();
   const amt=getRaw('txAmt');
-  const walletId=document.getElementById('txWallet').value;
+  const walletName=document.getElementById('txWallet').value;
   const date=document.getElementById('txDate').value;
-  if(!amt){showNotif('Masukkan nominal!');return;}
-  if(!walletId){showNotif('Pilih wallet!');return;}
-  if(!date){showNotif('Pilih tanggal!');return;}
-
-  const wi=d.wallets.findIndex(w=>w.id===parseInt(walletId));
-  if(wi<0){showNotif('Wallet tidak ditemukan!');return;}
+  if(!amt){ showNotif('Masukkan nominal!'); _savingTx=false; return; }
+  if(!walletName){ showNotif('Pilih wallet!'); _savingTx=false; return; }
+  if(!date){ showNotif('Pilih tanggal!'); _savingTx=false; return; }
 
   const tx={
     id:Date.now(),
     type:curType,
     owner:curType==='in'?'Pemasukan':curOwner,
-    wallet:walletId,
+    wallet:walletName,
+    walletTo:curType==='tf'?document.getElementById('txWalletTo').value:'',
     cat:curType==='tf'?'Transfer':document.getElementById('txCat').value,
     amt,
     desc:document.getElementById('txDesc').value.trim(),
-    date,
-    createdAt:new Date().toISOString()
+    date
   };
 
-  if(curType==='out') d.wallets[wi].balance-=amt;
-  else if(curType==='in') d.wallets[wi].balance+=amt;
-  else if(curType==='tf'){
-    const toId=document.getElementById('txWalletTo').value;
-    const toi=d.wallets.findIndex(w=>w.id===parseInt(toId));
-    if(toi<0){showNotif('Pilih wallet tujuan!');return;}
-    if(walletId===toId){showNotif('Wallet tidak boleh sama!');return;}
-    d.wallets[wi].balance-=amt;
-    d.wallets[toi].balance+=amt;
-    tx.walletTo=toId;
-  }
+  if(curType==='tf'&&!tx.walletTo){ showNotif('Pilih wallet tujuan!'); _savingTx=false; return; }
+  if(curType==='tf'&&tx.wallet===tx.walletTo){ showNotif('Wallet tidak boleh sama!'); _savingTx=false; return; }
 
   d.transactions.unshift(tx);
   save(d);
-  // Append to Google Sheets
-  const wAfter = d.wallets.find(w=>String(w.id)===String(walletId));
-  const wToAfter = tx.walletTo ? d.wallets.find(w=>String(w.id)===String(tx.walletTo)) : null;
-  appendToSheets(tx, wAfter?.name||'-', wToAfter?.name||'-').catch(()=>{});
-  document.getElementById('txAmt').value=''; document.getElementById('txAmt').dataset.raw='0';
+
+  // Append to Sheets
+  appendToSheets(tx).catch(()=>{});
+
+  // Reset form
+  document.getElementById('txAmt').value='';
+  if(document.getElementById('txAmt').dataset) document.getElementById('txAmt').dataset.raw='0';
   document.getElementById('txDesc').value='';
   document.getElementById('txDate').value=new Date().toISOString().slice(0,10);
+
+  renderWalletTab();
   showNotif('✅ Tersimpan!');
-  renderWalletList();
 }
 
-// ── WALLET ────────────────────────────────────────────
-function openWalletModal(id=null){
-  editWalletId=id;
-  const d=db();
-  if(id){
-    const w=d.wallets.find(x=>x.id===id);
-    if(w){
-      document.getElementById('wName').value=w.name;
-      document.getElementById('wType').value=w.type;
-      document.getElementById('wBal').value=w.balance;
-      document.getElementById('wIcon').value=w.icon||'';
-      document.getElementById('walletModalTitle').textContent='Edit Wallet';
-    }
-  } else {
-    ['wName','wBal','wIcon'].forEach(id=>document.getElementById(id).value='');
-    document.getElementById('walletModalTitle').textContent='Tambah Wallet';
-  }
-  document.getElementById('walletModal').style.display='block';
-}
-
-function saveWallet(){
-  const name=document.getElementById('wName').value.trim();
-  if(!name){showNotif('Masukkan nama wallet!');return;}
-  const d=db();
-  const bal=getRaw('wBal');
-  if(editWalletId){
-    const wi=d.wallets.findIndex(w=>w.id===editWalletId);
-    if(wi>=0){
-      d.wallets[wi].name=name;
-      d.wallets[wi].type=document.getElementById('wType').value;
-      d.wallets[wi].balance=bal;
-      d.wallets[wi].icon=document.getElementById('wIcon').value||'💳';
-    }
-  } else {
-    d.wallets.push({id:Date.now(),name,type:document.getElementById('wType').value,balance:bal,initialBalance:bal,icon:document.getElementById('wIcon').value||'💳',createdAt:new Date().toISOString()});
-  }
-  save(d);
-  closeModal('walletModal');
-  renderWalletList();
-  populateWalletSelects();
-  showNotif(editWalletId?'Wallet diupdate!':'Wallet ditambahkan!');
-  editWalletId=null;
-}
-
-function deleteWallet(id){
-  if(!confirm('Hapus wallet ini?')) return;
-  const d=db();
-  d.wallets=d.wallets.filter(w=>w.id!==id);
-  save(d);
-  renderWalletList();
-  populateWalletSelects();
-  showNotif('Wallet dihapus.');
-}
-
-function renderWalletList(){
-  const d=db();
-  const el=document.getElementById('walletList');
-  const totalEl=document.getElementById('totalBalAmt');
-  const subEl=document.getElementById('totalBalSub');
-  const total=d.wallets.reduce((s,w)=>s+w.balance,0);
-  totalEl.textContent=fmt(total);
-  subEl.textContent=`${d.wallets.length} wallet aktif`;
-  if(!d.wallets.length){
-    el.innerHTML='<div class="empty"><div class="ei">👛</div><p>Belum ada wallet.<br>Tambah wallet pertama kamu.</p></div>';
-    return;
-  }
-  el.innerHTML=d.wallets.map(w=>{
-    const txs=d.transactions.filter(t=>t.wallet===String(w.id)||t.walletTo===String(w.id));
-    return `<div class="wcard">
-      <div class="wcard-top">
-        <div style="display:flex;align-items:center;gap:10px">
-          <div class="wcard-icon" style="background:rgba(16,185,129,0.1)">${w.icon||'💳'}</div>
-          <div><div class="wcard-name">${w.name}</div><div class="wcard-type">${w.type}</div></div>
-        </div>
-      </div>
-      <div class="wcard-bal">${fmt(w.balance)}</div>
-      <div class="wcard-sub">${txs.length} transaksi</div>
-      <div class="wcard-btns">
-        <button class="btn-sm" onclick="openWalletModal(${w.id})">✏ Edit</button>
-        <button class="btn-danger" onclick="deleteWallet(${w.id})">🗑</button>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-// ── BUDGET ────────────────────────────────────────────
+// ── BUDGET ───────────────────────────────────────────────
 function openBudgetModal(){
   populateCatSelect('bCat');
   document.getElementById('bLimit').value='';
@@ -710,7 +572,7 @@ function saveBudget(){
   const cat=document.getElementById('bCat').value;
   const limit=getRaw('bLimit');
   const owner=document.getElementById('bOwner').value;
-  if(!limit){showNotif('Masukkan limit!');return;}
+  if(!limit){ showNotif('Masukkan limit!'); return; }
   const d=db();
   const bi=d.budgets.findIndex(b=>b.cat===cat&&b.owner===owner);
   if(bi>=0) d.budgets[bi].limit=limit;
@@ -726,7 +588,6 @@ function deleteBudget(id){
   d.budgets=d.budgets.filter(b=>b.id!==id);
   save(d);
   renderBudgetList();
-  showNotif('Budget dihapus.');
 }
 
 function renderBudgetList(){
@@ -737,20 +598,20 @@ function renderBudgetList(){
     return;
   }
   const now=new Date();
-  const monthStr=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
+  const ms=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-01`;
+  const me=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-31`;
   el.innerHTML=d.budgets.map(b=>{
-    const spent=d.transactions.filter(t=>t.type==='out'&&t.cat===b.cat&&t.date.startsWith(monthStr)&&(b.owner==='all'||t.owner===b.owner)).reduce((s,t)=>s+t.amt,0);
+    const spent=d.transactions.filter(t=>t.type==='out'&&t.cat===b.cat&&t.date>=ms&&t.date<=me&&(b.owner==='all'||t.owner===b.owner)).reduce((s,t)=>s+t.amt,0);
     const pct=Math.min(100,Math.round(spent/b.limit*100));
     const cls=pct>=100?'over':pct>=80?'warn':'safe';
-    const hintCls=pct>=100?'danger':pct>=80?'warn':'';
     return `<div class="card">
       <div class="budget-top">
         <div class="budget-cat">📌 ${b.cat} <span style="font-size:10px;color:#4a6080">${b.owner==='all'?'Semua':b.owner}</span></div>
         <button class="btn-danger" onclick="deleteBudget(${b.id})" style="padding:4px 8px;font-size:11px">✕</button>
       </div>
-      ${pct>=80?`<div class="hint ${hintCls}" style="margin-bottom:8px;font-size:11px">${pct>=100?'⚠️ Budget terlampaui!':'⚡ Mendekati limit ('+pct+'%)'}</div>`:''}
+      ${pct>=80?`<div class="hint ${pct>=100?'danger':'warn'}" style="margin-bottom:8px;font-size:11px">${pct>=100?'⚠️ Budget terlampaui!':'⚡ Mendekati limit ('+pct+'%)'}</div>`:''}
       <div class="budget-top">
-        <div class="budget-spent" style="color:${pct>=100?'#ef4444':pct>=80?'#f59e0b':'#e8f0fe'}">${fmt(spent)}</div>
+        <div style="font-size:13px;font-weight:600;color:${pct>=100?'#ef4444':pct>=80?'#f59e0b':'#e8f0fe'}">${fmt(spent)}</div>
         <div class="budget-amts">Limit: ${fmt(b.limit)}<br><span style="color:#4a6080">${pct}% terpakai</span></div>
       </div>
       <div class="prog-wrap"><div class="prog-track"><div class="prog-fill ${cls}" style="width:${pct}%"></div></div></div>
@@ -758,7 +619,48 @@ function renderBudgetList(){
   }).join('');
 }
 
-// ── TRANSACTIONS ──────────────────────────────────────
+// ── WALLET TAB ───────────────────────────────────────────
+function renderWalletTab(){
+  const d=db();
+  const balances=calcWalletBalances();
+  const total=Object.values(balances).reduce((s,v)=>s+v,0);
+
+  document.getElementById('walletTotalAmt').textContent=fmt(total);
+  document.getElementById('walletTotalSub').textContent=
+    `${d.wallets.length} wallet · ${d.lastPull?'Last pull: '+d.lastPull:'Belum pernah pull'}`;
+
+  const el=document.getElementById('walletList');
+  if(!d.wallets.length){
+    el.innerHTML='<div class="empty"><div class="ei">👛</div><p>Belum ada data wallet.<br>Lakukan Pull dari Sheets.</p></div>';
+    return;
+  }
+
+  // Sort by balance desc
+  const sorted=[...d.wallets].sort((a,b)=>(balances[b.nama]||0)-(balances[a.nama]||0));
+  const maxBal=Math.max(...sorted.map(w=>balances[w.nama]||0),1);
+
+  el.innerHTML=sorted.map(w=>{
+    const bal=balances[w.nama]||0;
+    const pct=Math.round(bal/maxBal*100);
+    const txCount=d.transactions.filter(t=>t.wallet===w.nama||t.walletTo===w.nama).length;
+    return `<div class="wcard">
+      <div class="wcard-icon">${w.icon||'💳'}</div>
+      <div class="wcard-info">
+        <div class="wcard-name">${w.nama}</div>
+        <div class="wcard-type">${w.tipe||''} · ${txCount} transaksi</div>
+        <div class="prog-wrap" style="margin-top:6px">
+          <div class="prog-track"><div class="prog-fill safe" style="width:${pct}%"></div></div>
+        </div>
+      </div>
+      <div class="wcard-right">
+        <div class="wcard-bal">${fmt(bal)}</div>
+        <div class="wcard-updated">Lokal</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── TRANSACTIONS ─────────────────────────────────────────
 function filterTx(el,filter){
   txFilter=filter;
   document.querySelectorAll('.fpill').forEach(p=>p.classList.remove('on'));
@@ -773,49 +675,43 @@ function renderTxList(){
   else if(txFilter==='in') txs=txs.filter(t=>t.type==='in');
   else if(txFilter==='Keluarga') txs=txs.filter(t=>t.owner==='Keluarga');
   else if(txFilter==='Pribadi') txs=txs.filter(t=>t.owner==='Pribadi');
+
   txs.sort((a,b)=>{
     const da=String(a.date||'').slice(0,10);
     const db2=String(b.date||'').slice(0,10);
     if(db2!==da) return db2.localeCompare(da);
     return b.id-a.id;
   });
+
   const el=document.getElementById('txList');
   if(!txs.length){
     el.innerHTML='<div class="empty"><div class="ei">📋</div><p>Belum ada transaksi.</p></div>';
     return;
   }
-  // Group by date
+
   const byDate={};
   txs.forEach(t=>{
     const dk=String(t.date||'').slice(0,10);
     if(!byDate[dk]) byDate[dk]=[];
     byDate[dk].push(t);
   });
+
   el.innerHTML=Object.keys(byDate).sort().reverse().map(date=>{
     const items=byDate[date];
-    const wallet=id=>{
-      // Try ID match first
-      const byId=d.wallets.find(x=>String(x.id)===String(id));
-      if(byId) return byId.name;
-      // Try name match (for pulled transactions)
-      const byName=d.wallets.find(x=>x.name===String(id));
-      if(byName) return byName.name;
-      // Return as-is if it looks like a wallet name, else '?'
-      return (typeof id==='string'&&id.length>0&&id!=='-')?id:'?';
-    };
     return `<div class="slbl">${date}</div><div class="card">${items.map(t=>{
       const icon=t.type==='out'?'⬆':t.type==='in'?'⬇':'↔';
       const ownerTag=t.owner&&t.owner!=='Pemasukan'?`<span class="tx-tag ${t.owner==='Keluarga'?'fam':'pri'}">${t.owner}</span>`:'';
+      const wDisplay=t.type==='tf'?`${t.wallet} → ${t.walletTo}`:t.wallet;
       return `<div class="tx-item">
         <div class="tx-icon ${t.type}">${icon}</div>
         <div class="tx-info">
           <div class="tx-desc">${t.desc||t.cat}</div>
-          <div class="tx-meta">${t.cat} · ${wallet(t.wallet)}${t.type==='tf'&&t.walletTo?` → ${wallet(t.walletTo)}`:''}${ownerTag}</div>
+          <div class="tx-meta">${t.cat} · ${wDisplay}${ownerTag}</div>
         </div>
         <div class="tx-amt ${t.type}">${t.type==='out'?'-':'+'} ${fmtk(t.amt)}</div>
         <div class="tx-actions">
-          <button class="btn-sm" onclick="openEditTx(${t.id})" style="padding:5px 8px">✏</button>
-          <button class="btn-danger" onclick="deleteTx(${t.id})" style="padding:5px 8px">🗑</button>
+          <button class="btn-s" onclick="openEditTx(${t.id})" style="padding:5px 8px;font-size:12px">✏</button>
+          <button class="btn-danger" onclick="deleteTx(${t.id})" style="padding:5px 8px;font-size:12px">🗑</button>
         </div>
       </div>`;
     }).join('')}</div>`;
@@ -824,24 +720,10 @@ function renderTxList(){
 
 function deleteTx(id){
   const d=db();
-  const ti=d.transactions.findIndex(t=>t.id===id);
-  if(ti<0) return;
-  const t=d.transactions[ti];
-  // Reverse balance
-  const wi=d.wallets.findIndex(w=>String(w.id)===String(t.wallet));
-  if(wi>=0){
-    if(t.type==='out') d.wallets[wi].balance+=t.amt;
-    else if(t.type==='in') d.wallets[wi].balance-=t.amt;
-    else if(t.type==='tf'){
-      d.wallets[wi].balance+=t.amt;
-      const toi=d.wallets.findIndex(w=>String(w.id)===String(t.walletTo));
-      if(toi>=0) d.wallets[toi].balance-=t.amt;
-    }
-  }
-  d.transactions.splice(ti,1);
+  d.transactions=d.transactions.filter(t=>t.id!==id);
   save(d);
   renderTxList();
-  renderWalletList();
+  renderWalletTab();
   showNotif('Transaksi dihapus. Edit Sheets jika perlu.');
 }
 
@@ -862,28 +744,19 @@ function saveEditTx(){
   const d=db();
   const ti=d.transactions.findIndex(t=>t.id===editTxId);
   if(ti<0) return;
-  const newAmt=getRaw('etAmt');
-  const oldAmt=d.transactions[ti].amt;
-  const diff=newAmt-oldAmt;
-  const type=d.transactions[ti].type;
-  const wi=d.wallets.findIndex(w=>String(w.id)===String(d.transactions[ti].wallet));
-  if(wi>=0){
-    if(type==='out') d.wallets[wi].balance-=diff;
-    else if(type==='in') d.wallets[wi].balance+=diff;
-  }
   d.transactions[ti].date=document.getElementById('etDate').value;
   d.transactions[ti].cat=document.getElementById('etCat').value;
-  d.transactions[ti].amt=newAmt;
+  d.transactions[ti].amt=getRaw('etAmt');
   d.transactions[ti].desc=document.getElementById('etDesc').value.trim();
   save(d);
   closeModal('editTxModal');
   renderTxList();
-  renderWalletList();
+  renderWalletTab();
   showNotif('Transaksi diupdate. Edit Sheets jika perlu.');
   editTxId=null;
 }
 
-// ── DASHBOARD ─────────────────────────────────────────
+// ── DASHBOARD ────────────────────────────────────────────
 function selPeriod(el,period){
   curPeriod=period;
   document.querySelectorAll('.pt').forEach(p=>p.classList.remove('on'));
@@ -895,8 +768,7 @@ function getPeriodRange(period){
   const now=new Date();
   let start,end;
   if(period==='week'){
-    // ISO week: Monday to Sunday
-    const day=now.getDay(); // 0=Sun,1=Mon,...,6=Sat
+    const day=now.getDay();
     const diffToMon=day===0?-6:1-day;
     start=new Date(now.getFullYear(),now.getMonth(),now.getDate()+diffToMon);
     end=new Date(start.getFullYear(),start.getMonth(),start.getDate()+6);
@@ -907,16 +779,18 @@ function getPeriodRange(period){
     start=new Date(now.getFullYear(),0,1);
     end=new Date(now.getFullYear(),11,31);
   }
-  return{start:start.toISOString().slice(0,10),end:end.toISOString().slice(0,10)};
+  return{
+    start:start.toISOString().slice(0,10),
+    end:end.toISOString().slice(0,10)
+  };
 }
 
 function renderDash(){
   const d=db();
   const {start,end}=getPeriodRange(curPeriod);
-
   const txs=d.transactions.filter(t=>{
     const dt=String(t.date||'').slice(0,10);
-    return dt.match(/^\d{4}-\d{2}-\d{2}$/) && dt>=start && dt<=end;
+    return dt.match(/^\d{4}-\d{2}-\d{2}$/)&&dt>=start&&dt<=end;
   });
 
   const totalOut=txs.filter(t=>t.type==='out').reduce((s,t)=>s+t.amt,0);
@@ -925,30 +799,30 @@ function renderDash(){
   const priOut=txs.filter(t=>t.type==='out'&&t.owner==='Pribadi').reduce((s,t)=>s+t.amt,0);
   const net=totalIn-totalOut;
 
-  // Category breakdown
   const catTotals={};
-  txs.filter(t=>t.type==='out').forEach(t=>{
-    catTotals[t.cat]=(catTotals[t.cat]||0)+t.amt;
-  });
+  txs.filter(t=>t.type==='out').forEach(t=>{ catTotals[t.cat]=(catTotals[t.cat]||0)+t.amt; });
   const catSorted=Object.entries(catTotals).sort((a,b)=>b[1]-a[1]).slice(0,5);
   const maxCat=catSorted.length?catSorted[0][1]:1;
 
-  // Monthly trend for year view
+  const balances=calcWalletBalances();
+  const totalWallet=Object.values(balances).reduce((s,v)=>s+v,0);
+
   const months=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
   const curYear=new Date().getFullYear();
   const monthlyData=months.map((m,i)=>{
     const ms=`${curYear}-${String(i+1).padStart(2,'0')}-01`;
     const me=`${curYear}-${String(i+1).padStart(2,'0')}-31`;
-    const mTxs=d.transactions.filter(t=>t.date>=ms&&t.date<=me);
-    return {
+    const mTxs=d.transactions.filter(t=>{
+      const dt=String(t.date||'').slice(0,10);
+      return dt>=ms&&dt<=me;
+    });
+    return{
       label:m,
       out:mTxs.filter(t=>t.type==='out').reduce((s,t)=>s+t.amt,0),
-      in:mTxs.filter(t=>t.type==='in').reduce((s,t)=>s+t.amt,0)
+      inp:mTxs.filter(t=>t.type==='in').reduce((s,t)=>s+t.amt,0)
     };
   });
-  const maxMonth=Math.max(...monthlyData.map(m=>Math.max(m.out,m.in)),1);
-
-  const totalWallet=d.wallets.reduce((s,w)=>s+w.balance,0);
+  const maxMonth=Math.max(...monthlyData.map(m=>Math.max(m.out,m.inp)),1);
   const periodLabel=curPeriod==='week'?'Minggu Ini':curPeriod==='month'?'Bulan Ini':'Tahun Ini';
 
   const el=document.getElementById('dashContent');
@@ -968,13 +842,13 @@ function renderDash(){
     <div class="slbl">Pengeluaran vs Pemasukan</div>
     <div class="card">
       ${curPeriod==='year'?`
-        <div style="font-size:10px;color:#4a6080;margin-bottom:8px">Trend bulanan ${curYear}</div>
+        <div style="font-size:10px;color:#4a6080;margin-bottom:8px">Trend ${curYear}</div>
         <div class="bar-chart" style="height:100px">
           ${monthlyData.map(m=>`
             <div class="bc-col">
-              <div style="flex:1;display:flex;align-items:flex-end;gap:2px;width:100%">
-                <div style="flex:1;border-radius:3px 3px 0 0;min-height:2px;height:${Math.round(m.out/maxMonth*80)}px;background:#ef4444"></div>
-                <div style="flex:1;border-radius:3px 3px 0 0;min-height:2px;height:${Math.round(m.in/maxMonth*80)}px;background:#10b981"></div>
+              <div style="flex:1;display:flex;align-items:flex-end;gap:1px;width:100%">
+                <div style="flex:1;border-radius:3px 3px 0 0;min-height:2px;height:${Math.round(m.out/maxMonth*80)}px;background:#ef4444;opacity:0.9"></div>
+                <div style="flex:1;border-radius:3px 3px 0 0;min-height:2px;height:${Math.round(m.inp/maxMonth*80)}px;background:#10b981;opacity:0.9"></div>
               </div>
               <div class="bc-lbl">${m.label}</div>
             </div>
@@ -985,20 +859,20 @@ function renderDash(){
           <div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#10b981"><div style="width:10px;height:10px;background:#10b981;border-radius:2px"></div>Masuk</div>
         </div>
       `:`
-        <div class="bar-chart" style="height:90px">
-          <div class="bc-col" style="max-width:120px;margin:auto">
+        <div class="bar-chart">
+          <div class="bc-col">
             <div class="bc-amt" style="color:#ef4444">${fmtk(totalOut)}</div>
             <div style="flex:1;display:flex;align-items:flex-end;width:100%">
               <div class="bc-bar" style="height:${totalOut||totalIn?Math.round(totalOut/Math.max(totalOut,totalIn)*75):2}px;background:#ef4444"></div>
             </div>
-            <div class="bc-lbl">Pengeluaran</div>
+            <div class="bc-lbl">⬆ Pengeluaran</div>
           </div>
-          <div class="bc-col" style="max-width:120px;margin:auto">
+          <div class="bc-col">
             <div class="bc-amt" style="color:#10b981">${fmtk(totalIn)}</div>
             <div style="flex:1;display:flex;align-items:flex-end;width:100%">
               <div class="bc-bar" style="height:${totalOut||totalIn?Math.round(totalIn/Math.max(totalOut,totalIn)*75):2}px;background:#10b981"></div>
             </div>
-            <div class="bc-lbl">Pemasukan</div>
+            <div class="bc-lbl">⬇ Pemasukan</div>
           </div>
         </div>
       `}
@@ -1006,15 +880,15 @@ function renderDash(){
 
     <div class="slbl">Keluarga vs Pribadi</div>
     <div class="card">
-      <div class="bar-chart" style="height:90px">
-        <div class="bc-col" style="max-width:120px;margin:auto">
+      <div class="bar-chart">
+        <div class="bc-col">
           <div class="bc-amt" style="color:#3b82f6">${fmtk(famOut)}</div>
           <div style="flex:1;display:flex;align-items:flex-end;width:100%">
             <div class="bc-bar" style="height:${famOut||priOut?Math.round(famOut/Math.max(famOut,priOut)*75):2}px;background:linear-gradient(180deg,#3b82f6,#1d4ed8)"></div>
           </div>
           <div class="bc-lbl">👨‍👩‍👧 Keluarga</div>
         </div>
-        <div class="bc-col" style="max-width:120px;margin:auto">
+        <div class="bc-col">
           <div class="bc-amt" style="color:#a855f7">${fmtk(priOut)}</div>
           <div style="flex:1;display:flex;align-items:flex-end;width:100%">
             <div class="bc-bar" style="height:${famOut||priOut?Math.round(priOut/Math.max(famOut,priOut)*75):2}px;background:linear-gradient(180deg,#a855f7,#7c3aed)"></div>
@@ -1034,45 +908,101 @@ function renderDash(){
             <div class="budget-amts">${fmt(amt)} <span style="color:#4a6080">${pct}%</span></div>
           </div>
           <div class="prog-wrap">
-            <div class="prog-track">
-              <div class="prog-fill safe" style="width:${Math.round(amt/maxCat*100)}%"></div>
-            </div>
+            <div class="prog-track"><div class="prog-fill safe" style="width:${Math.round(amt/maxCat*100)}%"></div></div>
           </div>
         </div>`;
       }).join(''):`<div style="color:#4a6080;font-size:12px;text-align:center;padding:10px">Belum ada data untuk ${periodLabel}</div>`}
     </div>
 
-    <div class="slbl">Total Saldo Semua Wallet</div>
+    <div class="slbl">Total Saldo Wallet</div>
     <div class="card" style="text-align:center;padding:16px">
       <div style="font-size:26px;font-weight:700;color:#10b981">${fmt(totalWallet)}</div>
       <div style="font-size:11px;color:#4a6080;margin-top:4px">${d.wallets.length} wallet · ${start} s/d ${end}</div>
     </div>
-
-    <div class="slbl">Saldo per Wallet</div>
-    <div class="card">
-      ${d.wallets.length?d.wallets.map(w=>`
-        <div class="budget-item">
-          <div class="budget-top">
-            <div class="budget-cat">${w.icon||'💳'} ${w.name}</div>
-            <div style="font-size:13px;font-weight:600;color:${w.balance>=0?'#10b981':'#ef4444'}">${fmt(w.balance)}</div>
-          </div>
-        </div>
-      `).join(''):`<div style="color:#4a6080;font-size:12px;text-align:center;padding:10px">Belum ada wallet</div>`}
-    </div>
   `;
 }
-// ── MODAL ─────────────────────────────────────────────
+
+// ── GOOGLE SHEETS SYNC ───────────────────────────────────
+async function appendToSheets(tx){
+  try{
+    const params=new URLSearchParams({
+      type:'append',
+      tanggal:tx.date,
+      tipe:tx.type==='out'?'Pengeluaran':tx.type==='in'?'Pemasukan':'Transfer',
+      owner:tx.owner||'-',
+      wallet:tx.wallet||'-',
+      walletTo:tx.walletTo||'-',
+      kategori:tx.cat||'-',
+      nominal:tx.amt,
+      catatan:tx.desc||'',
+      txid:tx.id
+    });
+    await fetch(SHEET_URL+'?'+params.toString(),{method:'GET',mode:'no-cors'});
+  }catch(e){
+    console.warn('Append failed:',e);
+  }
+}
+
+async function pullAll(){
+  showNotif('⏳ Pulling dari Sheets...');
+  try{
+    // Pull transaksi dan wallet sekaligus
+    const [txRes, wRes] = await Promise.all([
+      fetch(SHEET_URL+'?type=pull'),
+      fetch(SHEET_URL+'?type=pull_wallets')
+    ]);
+    const txData=await txRes.json();
+    const wData=await wRes.json();
+    const d=db();
+
+    // Update transaksi
+    if(txData.status==='ok'&&txData.transactions){
+      d.transactions=txData.transactions.map(r=>{
+        let dateVal=String(r[0]||'').trim().slice(0,10);
+        return{
+          id:parseInt(r[8])||Date.now(),
+          date:dateVal,
+          type:r[1]==='Pengeluaran'?'out':r[1]==='Pemasukan'?'in':'tf',
+          owner:r[2]||'-',
+          wallet:r[3]||'-',
+          walletTo:r[4]||'',
+          cat:r[5]||'-',
+          amt:parseFloat(r[6])||0,
+          desc:r[7]||''
+        };
+      }).filter(t=>t.date.match(/^\d{4}-\d{2}-\d{2}$/));
+    }
+
+    // Update wallets dari sheet
+    if(wData.status==='ok'&&wData.wallets){
+      d.wallets=wData.wallets;
+    }
+
+    d.lastPull=new Date().toLocaleString('id-ID');
+    save(d);
+
+    populateWalletSelects();
+    renderTxList();
+    renderWalletTab();
+    renderDash();
+    showNotif(`✅ Pull berhasil! ${d.transactions.length} transaksi · ${d.wallets.length} wallet`);
+  }catch(e){
+    console.warn('Pull error:',e);
+    showNotif('❌ Gagal koneksi ke Sheets');
+  }
+}
+
+// ── MODAL / NAV ──────────────────────────────────────────
 function closeModal(id){ document.getElementById(id).style.display='none'; }
 function openSettings(){ renderCatManage(); document.getElementById('settingsModal').style.display='block'; }
-function clearAllData(){ if(confirm('Hapus semua data FamGet?')){ localStorage.removeItem('famget_v1'); location.reload(); } }
+function clearAllData(){ if(confirm('Hapus semua data FamGet?')){ localStorage.removeItem(DB_KEY); location.reload(); } }
 
-// ── NAV ───────────────────────────────────────────────
 function go(page){
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.nt').forEach(t=>t.classList.remove('on'));
   document.getElementById('pg-'+page).classList.add('on');
   document.getElementById('tab-'+page).classList.add('on');
-  if(page==='wallet') renderWalletList();
+  if(page==='wallet') renderWalletTab();
   if(page==='budget') renderBudgetList();
   if(page==='tx') renderTxList();
   if(page==='dash') renderDash();
@@ -1084,91 +1014,7 @@ function showNotif(msg){
   setTimeout(()=>n.classList.remove('show'),2500);
 }
 
-// ── START ─────────────────────────────────────────────
-// ── GOOGLE SHEETS SYNC ───────────────────────────────
-const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzwd2gMCEXww_MolTS5hQ7T6EHGPoPSguRmq9fKqqUlU-8n4W5pWTdIP-diFbjQ3U-g/exec';
-
-async function appendToSheets(tx, walletName, walletToName) {
-  try {
-    const params = new URLSearchParams({
-      type: 'append',
-      tanggal: tx.date,
-      tipe: tx.type==='out'?'Pengeluaran':tx.type==='in'?'Pemasukan':'Transfer',
-      owner: tx.owner||'-',
-      wallet: walletName||'-',
-      walletTo: walletToName||'-',
-      kategori: tx.cat||'-',
-      nominal: tx.amt,
-      catatan: tx.desc||'',
-      txid: tx.id
-    });
-    await fetch(SHEET_URL+'?'+params.toString(),{method:'GET',mode:'no-cors'});
-  } catch(e) {
-    console.warn('Append failed:',e);
-  }
-}
-
-async function pullFromSheets() {
-  try {
-    showNotif('⏳ Pulling dari Sheets...');
-    const resp = await fetch(SHEET_URL+'?type=pull');
-    const data = await resp.json();
-    if(data.status==='ok' && data.transactions) {
-      const d = db();
-      d.transactions = data.transactions.map(r => {
-        let dateVal = String(r[0]||'').trim().slice(0,10);
-        return {
-          id: parseInt(r[8])||Date.now(),
-          date: dateVal,
-          type: r[1]==='Pengeluaran'?'out':r[1]==='Pemasukan'?'in':'tf',
-          owner: r[2]||'-',
-          wallet: r[3]||'-',
-          walletTo: r[4]||'',
-          cat: r[5]||'-',
-          amt: parseFloat(r[6])||0,
-          desc: r[7]||''
-        };
-      }).filter(t=>t.date.match(/^\d{4}-\d{2}-\d{2}$/));
-      save(d);
-      recalcWalletBalances(true);
-      renderTxList();
-      renderDash();
-      renderWalletList();
-      showNotif('✅ Pull berhasil! '+d.transactions.length+' transaksi');
-    } else {
-      showNotif('❌ Pull gagal');
-    }
-  } catch(e) {
-    console.warn('Pull error:',e);
-    showNotif('❌ Gagal koneksi ke Sheets');
-  }
-}
-
-function recalcWalletBalances(silent=false) {
-  const d = db();
-  if(!d.wallets.length) { if(!silent) showNotif('Buat wallet dulu!'); return; }
-  d.wallets.forEach(w=>{ w.balance = w.initialBalance||0; });
-  d.transactions.forEach(tx=>{
-    const wi = d.wallets.findIndex(w=>
-      String(w.id)===String(tx.wallet)||w.name===String(tx.wallet)
-    );
-    if(wi<0) return;
-    if(tx.type==='out') d.wallets[wi].balance -= tx.amt;
-    else if(tx.type==='in') d.wallets[wi].balance += tx.amt;
-    else if(tx.type==='tf') {
-      d.wallets[wi].balance -= tx.amt;
-      const toi = d.wallets.findIndex(w=>
-        String(w.id)===String(tx.walletTo)||w.name===String(tx.walletTo)
-      );
-      if(toi>=0) d.wallets[toi].balance += tx.amt;
-    }
-  });
-  save(d);
-  renderWalletList();
-  if(!silent) showNotif('✅ Saldo berhasil dihitung ulang!');
-}
-
-
+// ── START ────────────────────────────────────────────────
 init();
 setupNumberInputs();
 </script>
