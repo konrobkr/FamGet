@@ -21,7 +21,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#e
 .logo-icon{width:34px;height:34px;background:linear-gradient(135deg,#10b981,#059669);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 .hdr-title{font-size:18px;font-weight:700;color:#fff;letter-spacing:1px}
 .hdr-sub{font-size:10px;color:#10b981;letter-spacing:2px;text-transform:uppercase}
-.hdr-settings{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;border:none;background:rgba(16,185,129,0.1)}
 
 .nav{display:flex;background:#0d1f3c;border-bottom:1px solid rgba(16,185,129,0.15);position:relative;z-index:10;flex-shrink:0}
 .nt{flex:1;padding:8px 2px 6px;text-align:center;font-size:9px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:#4a6080;cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;transition:all 0.2s}
@@ -82,7 +81,6 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .sc.blue .sv{color:#3b82f6}
 .sc.yellow .sv{color:#f59e0b}
 
-/* WALLET CARD — read only */
 .wcard{background:rgba(13,31,60,0.95);border:1px solid rgba(16,185,129,0.15);border-radius:12px;padding:14px;margin-bottom:8px;display:flex;align-items:center;gap:12px}
 .wcard-icon{width:42px;height:42px;border-radius:12px;background:rgba(16,185,129,0.1);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
 .wcard-info{flex:1;min-width:0}
@@ -98,7 +96,6 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .prog-fill.safe{background:linear-gradient(90deg,#059669,#10b981)}
 .prog-fill.warn{background:linear-gradient(90deg,#d97706,#f59e0b)}
 .prog-fill.over{background:linear-gradient(90deg,#dc2626,#ef4444)}
-.prog-lbl{display:flex;justify-content:space-between;font-size:10px;color:#6b8ab0;margin-top:4px}
 
 .tx-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(16,185,129,0.06)}
 .tx-item:last-child{border:none}
@@ -109,7 +106,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .tx-info{flex:1;min-width:0}
 .tx-desc{font-size:13px;color:#e8f0fe;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tx-meta{font-size:10px;color:#4a6080;margin-top:2px}
-.tx-tag{display:inline-block;padding:1px 6px;border-radius:4px;font-size:9px;margin-left:4px;text-transform:uppercase;letter-spacing:0.5px}
+.tx-tag{display:inline-block;padding:1px 6px;border-radius:4px;font-size:9px;margin-left:4px;text-transform:uppercase}
 .tx-tag.fam{background:rgba(59,130,246,0.15);color:#60a5fa}
 .tx-tag.pri{background:rgba(168,85,247,0.15);color:#c084fc}
 .tx-amt{font-size:14px;font-weight:700;white-space:nowrap}
@@ -123,17 +120,19 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .budget-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
 .budget-cat{font-size:13px;font-weight:500;color:#e8f0fe;display:flex;align-items:center;gap:6px}
 .budget-amts{font-size:12px;color:#6b8ab0;text-align:right}
-.budget-spent{font-size:13px;font-weight:600}
 
-.period-toggle{display:flex;gap:4px;margin-bottom:14px;background:rgba(13,31,60,0.8);border:1px solid rgba(16,185,129,0.12);border-radius:10px;padding:3px}
-.pt{flex:1;padding:7px;text-align:center;font-size:11px;font-weight:600;color:#4a6080;cursor:pointer;border-radius:8px;border:none;background:none;transition:all 0.2s}
-.pt.on{background:rgba(16,185,129,0.15);color:#10b981}
+/* PAY PERIOD NAVIGATOR */
+.period-nav{display:flex;align-items:center;justify-content:space-between;background:rgba(13,31,60,0.9);border:1px solid rgba(16,185,129,0.2);border-radius:12px;padding:10px 14px;margin-bottom:14px}
+.period-nav-btn{width:36px;height:36px;border-radius:8px;border:1px solid rgba(16,185,129,0.25);background:transparent;color:#10b981;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.period-nav-btn:disabled{color:#2a4060;border-color:rgba(16,185,129,0.1);cursor:default}
+.period-nav-center{text-align:center}
+.period-nav-label{font-size:15px;font-weight:700;color:#fff}
+.period-nav-range{font-size:10px;color:#6b8ab0;margin-top:2px}
+.period-now-btn{font-size:10px;color:#10b981;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);border-radius:6px;padding:3px 8px;cursor:pointer}
 
-.bar-chart{display:flex;align-items:flex-end;gap:6px;height:90px;margin-top:8px}
-.bc-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
-.bc-bar{width:100%;border-radius:4px 4px 0 0;min-height:2px;transition:height 0.6s}
-.bc-lbl{font-size:9px;color:#4a6080;text-align:center}
-.bc-amt{font-size:9px;color:#8ab0d0;text-align:center}
+.view-toggle{display:flex;gap:4px;margin-bottom:14px;background:rgba(13,31,60,0.8);border:1px solid rgba(16,185,129,0.12);border-radius:10px;padding:3px}
+.vt{flex:1;padding:7px;text-align:center;font-size:11px;font-weight:600;color:#4a6080;cursor:pointer;border-radius:8px;border:none;background:none;transition:all 0.2s}
+.vt.on{background:rgba(16,185,129,0.15);color:#10b981}
 
 .filter-row{display:flex;gap:6px;margin-bottom:10px;overflow-x:auto;padding-bottom:2px}
 .filter-row::-webkit-scrollbar{display:none}
@@ -160,10 +159,6 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .cat-tag{display:inline-flex;align-items:center;gap:4px;padding:6px 10px;border-radius:8px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.15);font-size:12px;color:#10b981}
 .cat-tag button{background:none;border:none;color:#6b8ab0;cursor:pointer;font-size:12px;padding:0}
 
-.pull-banner{background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(13,31,60,0.9));border:1px solid rgba(59,130,246,0.25);border-radius:10px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.pull-banner-txt{font-size:12px;color:#93c5fd}
-.pull-banner-sub{font-size:10px;color:#4a6080;margin-top:2px}
-
 .wallet-total{background:linear-gradient(135deg,#0d3320,#0a2040);border:1px solid rgba(16,185,129,0.3);border-radius:14px;padding:16px;margin-bottom:12px;text-align:center}
 .wallet-total .wt-lbl{font-size:10px;color:#6b8ab0;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
 .wallet-total .wt-amt{font-size:28px;font-weight:700;color:#10b981}
@@ -176,12 +171,9 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   <div class="hdr-row">
     <div class="hdr-logo">
       <div class="logo-icon">💰</div>
-      <div>
-        <div class="hdr-title">FamGet</div>
-        <div class="hdr-sub">Family Budget</div>
-      </div>
+      <div><div class="hdr-title">FamGet</div><div class="hdr-sub">Family Budget</div></div>
     </div>
-    <button class="hdr-settings" onclick="openSettings()">⚙️</button>
+    <button onclick="openSettings()" style="width:34px;height:34px;border-radius:8px;border:none;background:rgba(16,185,129,0.1);font-size:16px;cursor:pointer">⚙️</button>
   </div>
 </div>
 
@@ -211,42 +203,29 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
       </div>
     </div>
     <div class="fl">
-      <div class="fg">
-        <div class="flbl">Tanggal</div>
-        <input type="date" id="txDate">
-      </div>
-      <div class="fg">
-        <div class="flbl">Wallet</div>
-        <select id="txWallet"></select>
-      </div>
+      <div class="fg"><div class="flbl">Tanggal</div><input type="date" id="txDate"></div>
+      <div class="fg"><div class="flbl">Wallet</div><select id="txWallet"></select></div>
     </div>
     <div id="tfToRow" class="fg" style="display:none">
-      <div class="flbl">Ke Wallet</div>
-      <select id="txWalletTo"></select>
+      <div class="flbl">Ke Wallet</div><select id="txWalletTo"></select>
     </div>
     <div id="catRow" class="fg">
       <div class="flbl">Kategori</div>
       <div style="display:flex;gap:6px">
         <select id="txCat" style="flex:1"></select>
-        <button class="btn-s" onclick="addCatFromInput()">+ Baru</button>
+        <button class="btn-s" onclick="addCatPrompt()">+ Baru</button>
       </div>
       <input type="text" id="newCatInput" placeholder="Nama kategori baru..." style="display:none;margin-top:6px" onkeydown="if(event.key==='Enter')saveCat()">
     </div>
-    <div class="fg">
-      <div class="flbl">Nominal (Rp)</div>
-      <input type="number" id="txAmt" placeholder="0" inputmode="numeric">
-    </div>
-    <div class="fg">
-      <div class="flbl">Catatan</div>
-      <input type="text" id="txDesc" placeholder="Opsional..." autocomplete="off">
-    </div>
+    <div class="fg"><div class="flbl">Nominal (Rp)</div><input type="number" id="txAmt" placeholder="0" inputmode="numeric"></div>
+    <div class="fg"><div class="flbl">Catatan</div><input type="text" id="txDesc" placeholder="Opsional..." autocomplete="off"></div>
     <button class="btn-p" onclick="saveTx()">💾 Simpan</button>
   </div>
 </div>
 
 <!-- TRANSAKSI -->
 <div id="pg-tx" class="pg">
-  <div class="filter-row" id="filterRow">
+  <div class="filter-row">
     <button class="fpill on" onclick="filterTx(this,'all')">Semua</button>
     <button class="fpill" onclick="filterTx(this,'out')">⬆ Keluar</button>
     <button class="fpill" onclick="filterTx(this,'in')">⬇ Masuk</button>
@@ -256,11 +235,9 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   <div id="txList"></div>
 </div>
 
-<!-- WALLET — read only -->
+<!-- WALLET -->
 <div id="pg-wallet" class="pg">
-  <div class="hint info" style="margin-bottom:12px">
-    ℹ️ Wallet dikelola di Google Sheets. Gunakan Pull untuk update data terbaru.
-  </div>
+  <div class="hint info" style="margin-bottom:12px">ℹ️ Wallet dikelola di Google Sheets. Pull untuk update data terbaru.</div>
   <div class="wallet-total">
     <div class="wt-lbl">Total Saldo Semua Wallet</div>
     <div class="wt-amt" id="walletTotalAmt">Rp 0</div>
@@ -277,22 +254,31 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 
 <!-- DASHBOARD -->
 <div id="pg-dash" class="pg">
-  <div class="period-toggle">
-    <button class="pt on" onclick="selPeriod(this,'week')">Minggu Ini</button>
-    <button class="pt" onclick="selPeriod(this,'month')">Bulan Ini</button>
-    <button class="pt" onclick="selPeriod(this,'year')">Tahun Ini</button>
+  <!-- Pay Period Navigator -->
+  <div class="period-nav">
+    <button class="period-nav-btn" onclick="shiftPeriod(-1)" id="btnPrev">◀</button>
+    <div class="period-nav-center">
+      <div class="period-nav-label" id="periodLabel">—</div>
+      <div class="period-nav-range" id="periodRange">—</div>
+    </div>
+    <button class="period-nav-btn" onclick="shiftPeriod(1)" id="btnNext">▶</button>
+  </div>
+  <!-- View toggle: Pay Period vs Yearly -->
+  <div class="view-toggle">
+    <button class="vt on" onclick="selView(this,'period')">Periode Ini</button>
+    <button class="vt" onclick="selView(this,'year')">Trend Tahunan</button>
   </div>
   <div id="dashContent"></div>
 </div>
 
-</div>
+</div><!-- /pages -->
 
 <!-- BUDGET MODAL -->
 <div class="modal" id="budgetModal">
   <div class="modal-box">
     <div class="modal-title"><span>Set Budget</span><button class="btn-s" onclick="closeModal('budgetModal')">✕</button></div>
     <div class="fg"><div class="flbl">Kategori</div><select id="bCat"></select></div>
-    <div class="fg"><div class="flbl">Limit per Bulan (Rp)</div><input type="number" id="bLimit" placeholder="0" inputmode="numeric"></div>
+    <div class="fg"><div class="flbl">Limit per Periode (Rp)</div><input type="number" id="bLimit" placeholder="0" inputmode="numeric"></div>
     <div class="fg"><div class="flbl">Untuk</div>
       <select id="bOwner"><option value="all">Semua</option><option value="Keluarga">Keluarga</option><option value="Pribadi">Pribadi</option></select>
     </div>
@@ -308,7 +294,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   <div class="modal-box">
     <div class="modal-title"><span>⚙️ Settings</span><button class="btn-s" onclick="closeModal('settingsModal')">✕</button></div>
     <div class="slbl">Sync</div>
-    <button class="btn-p" style="margin-bottom:8px;background:linear-gradient(135deg,#3b82f6,#1d4ed8)" onclick="pullAll();closeModal('settingsModal')">☁️ Pull Data dari Sheets</button>
+    <button class="btn-p" style="margin-bottom:12px;background:linear-gradient(135deg,#3b82f6,#1d4ed8)" onclick="pullAll();closeModal('settingsModal')">☁️ Pull Data dari Sheets</button>
     <div class="slbl">Kategori</div>
     <div id="catManageList" class="cat-list" style="margin-bottom:12px"></div>
     <div style="display:flex;gap:6px;margin-bottom:14px">
@@ -340,21 +326,44 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 
 <script>
 const SHEET_URL='https://script.google.com/macros/s/AKfycbzwd2gMCEXww_MolTS5hQ7T6EHGPoPSguRmq9fKqqUlU-8n4W5pWTdIP-diFbjQ3U-g/exec';
+const CUTOFF_DAY=24; // Gajian tanggal 24
+
+// Default categories
+const DEFAULT_CATS=[
+  "🏠 Rumah Tangga","🍽 Makan & Minum","🚗 Transportasi",
+  "📚 Pendidikan","💊 Kesehatan","🧾 Tagihan & Utilitas",
+  "🙏 Sosial & Ibadah","👗 Pribadi","💰 Tabungan & Investasi","🎲 Lain-lain"
+];
+
+// Category colors for pie chart
+const CAT_COLORS={
+  "🏠 Rumah Tangga":"#10b981",
+  "🍽 Makan & Minum":"#f59e0b",
+  "🚗 Transportasi":"#3b82f6",
+  "📚 Pendidikan":"#8b5cf6",
+  "💊 Kesehatan":"#ec4899",
+  "🧾 Tagihan & Utilitas":"#14b8a6",
+  "🙏 Sosial & Ibadah":"#f97316",
+  "👗 Pribadi":"#a855f7",
+  "💰 Tabungan & Investasi":"#22c55e",
+  "🎲 Lain-lain":"#94a3b8"
+};
+function getCatColor(cat,idx){
+  return CAT_COLORS[cat]||['#10b981','#f59e0b','#3b82f6','#8b5cf6','#ec4899','#14b8a6','#f97316','#a855f7','#22c55e','#94a3b8'][idx%10];
+}
 
 // ── DB ──────────────────────────────────────────────────
-const DB_KEY='famget_v2';
+const DB_KEY='famget_v3';
 function db(){
   return JSON.parse(localStorage.getItem(DB_KEY)||JSON.stringify({
-    wallets:[],
-    transactions:[],
-    budgets:[],
-    categories:["Makanan","Transportasi","Tagihan","Belanja","Kesehatan","Pendidikan","Hiburan","Tabungan","Sedekah","Lain-lain"],
+    wallets:[],transactions:[],budgets:[],
+    categories:[...DEFAULT_CATS],
     lastPull:null
   }));
 }
-function save(d){ localStorage.setItem(DB_KEY,JSON.stringify(d)); }
+function save(d){localStorage.setItem(DB_KEY,JSON.stringify(d));}
 
-function fmt(n){ return 'Rp '+Math.round(n).toLocaleString('id-ID'); }
+function fmt(n){return 'Rp '+Math.round(n).toLocaleString('id-ID');}
 function fmtk(n){
   const abs=Math.abs(n);
   if(abs>=1000000000) return 'Rp '+(n/1000000000).toFixed(1)+'M';
@@ -363,35 +372,89 @@ function fmtk(n){
   return fmt(n);
 }
 
-// ── WALLET SALDO — hitung dari transaksi lokal (Opsi A) ──
-function calcWalletBalances(){
-  const d=db();
-  const balances={};
-  // Init dari saldo awal
-  d.wallets.forEach(w=>{
-    balances[w.nama]=(w.awal||0);
-  });
-  // Hitung dari transaksi
-  d.transactions.forEach(tx=>{
-    const wName=String(tx.wallet||'');
-    const wTo=String(tx.walletTo||'');
-    if(tx.type==='out') balances[wName]=(balances[wName]||0)-tx.amt;
-    else if(tx.type==='in') balances[wName]=(balances[wName]||0)+tx.amt;
-    else if(tx.type==='tf'){
-      balances[wName]=(balances[wName]||0)-tx.amt;
-      if(wTo) balances[wTo]=(balances[wTo]||0)+tx.amt;
-    }
-  });
-  return balances;
+// ── PAY PERIOD LOGIC ─────────────────────────────────────
+// Pay period: 24th of month M → 23rd of month M+1 → labeled "Mmm YYYY"
+// e.g. 24 Jul - 23 Aug = "Jul 2026"
+
+let periodOffset=0; // 0=current, -1=prev, etc.
+let dashView='period'; // 'period' or 'year'
+
+function getPayPeriod(offset){
+  const now=new Date();
+  const today=now.getDate();
+  const thisMonth=now.getMonth(); // 0-indexed
+  const thisYear=now.getFullYear();
+
+  // Current period base month: if today >= 24, base = this month; else base = last month
+  let baseMonth=today>=CUTOFF_DAY?thisMonth:thisMonth-1;
+  let baseYear=thisYear;
+  if(baseMonth<0){baseMonth=11;baseYear--;}
+
+  // Apply offset
+  baseMonth+=offset;
+  while(baseMonth<0){baseMonth+=12;baseYear--;}
+  while(baseMonth>11){baseMonth-=12;baseYear++;}
+
+  const startDate=`${baseYear}-${String(baseMonth+1).padStart(2,'0')}-${String(CUTOFF_DAY).padStart(2,'0')}`;
+
+  let endMonth=baseMonth+1;
+  let endYear=baseYear;
+  if(endMonth>11){endMonth=0;endYear++;}
+  const endDate=`${endYear}-${String(endMonth+1).padStart(2,'0')}-23`;
+
+  const months=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+  const label=`${months[baseMonth]} ${baseYear}`;
+
+  return{start:startDate,end:endDate,label,baseMonth,baseYear};
 }
 
-// ── FORMAT NUMBER INPUT ──────────────────────────────────
+function shiftPeriod(dir){
+  periodOffset+=dir;
+  // Don't allow future periods beyond current
+  if(periodOffset>0) periodOffset=0;
+  updatePeriodNav();
+  renderDash();
+}
+
+function updatePeriodNav(){
+  const p=getPayPeriod(periodOffset);
+  document.getElementById('periodLabel').textContent=p.label;
+  document.getElementById('periodRange').textContent=`${p.start} — ${p.end}`;
+  document.getElementById('btnNext').disabled=(periodOffset>=0);
+}
+
+function selView(el,view){
+  dashView=view;
+  document.querySelectorAll('.vt').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  renderDash();
+}
+
+// ── WALLET CALC ──────────────────────────────────────────
+function calcWalletBalances(){
+  const d=db();
+  const bal={};
+  d.wallets.forEach(w=>{bal[w.nama]=w.awal||0;});
+  d.transactions.forEach(tx=>{
+    const wn=String(tx.wallet||'');
+    const wt=String(tx.walletTo||'');
+    if(tx.type==='out') bal[wn]=(bal[wn]||0)-tx.amt;
+    else if(tx.type==='in') bal[wn]=(bal[wn]||0)+tx.amt;
+    else if(tx.type==='tf'){
+      bal[wn]=(bal[wn]||0)-tx.amt;
+      if(wt) bal[wt]=(bal[wt]||0)+tx.amt;
+    }
+  });
+  return bal;
+}
+
+// ── NUMBER FORMAT ────────────────────────────────────────
 function setupNumberInputs(){
   document.querySelectorAll('input[type=number]').forEach(inp=>{
     const ni=document.createElement('input');
-    ni.type='text'; ni.inputMode='numeric';
-    ni.id=inp.id; ni.placeholder=inp.placeholder||'0';
-    ni.className=inp.className; ni.style.cssText=inp.style.cssText;
+    ni.type='text';ni.inputMode='numeric';
+    ni.id=inp.id;ni.placeholder=inp.placeholder||'0';
+    ni.className=inp.className;ni.style.cssText=inp.style.cssText;
     ni.dataset.raw='0';
     ni.addEventListener('input',function(){
       const raw=this.value.replace(/[^0-9]/g,'');
@@ -405,25 +468,22 @@ function setupNumberInputs(){
 function getRaw(id){
   const el=document.getElementById(id);
   if(!el) return 0;
-  if(el.dataset&&el.dataset.raw!==undefined&&el.dataset.raw!=='0'&&el.dataset.raw!==''){
+  if(el.dataset&&el.dataset.raw&&el.dataset.raw!=='0')
     return parseFloat(el.dataset.raw)||0;
-  }
-  const raw=String(el.value).replace(/\./g,'').replace(/,/g,'').replace(/[^0-9]/g,'');
+  const raw=String(el.value).replace(/\./g,'').replace(/[^0-9]/g,'');
   return parseFloat(raw)||0;
 }
 
 // ── STATE ────────────────────────────────────────────────
-let curType='out', curOwner='Keluarga', curPeriod='month', txFilter='all', editTxId=null;
-let _savingTx=false;
+let curType='out',curOwner='Keluarga',txFilter='all',editTxId=null,_saving=false;
 
-// ── INIT ────────────────────────────────────────────────
 function init(){
   document.getElementById('txDate').value=new Date().toISOString().slice(0,10);
   populateWalletSelects();
   populateCatSelect();
+  updatePeriodNav();
 }
 
-// ── TYPE / OWNER ─────────────────────────────────────────
 function selType(el,type){
   curType=type;
   ['out','in','tf'].forEach(t=>{
@@ -440,7 +500,6 @@ function selOwner(el,owner){
   el.classList.add('sel');
 }
 
-// ── WALLET SELECTS ───────────────────────────────────────
 function populateWalletSelects(){
   const d=db();
   ['txWallet','txWalletTo'].forEach(id=>{
@@ -458,24 +517,22 @@ function populateWalletSelects(){
   });
 }
 
-// ── CAT SELECT ───────────────────────────────────────────
-function populateCatSelect(targetId='txCat'){
+function populateCatSelect(id='txCat'){
   const d=db();
-  const sel=document.getElementById(targetId);
+  const sel=document.getElementById(id);
   if(!sel) return;
   const cur=sel.value;
   sel.innerHTML='';
   d.categories.forEach(c=>{
     const o=document.createElement('option');
-    o.value=c; o.textContent=c;
-    sel.appendChild(o);
+    o.value=c;o.textContent=c;sel.appendChild(o);
   });
   if(cur) sel.value=cur;
 }
 
-function addCatFromInput(){
+function addCatPrompt(){
   const inp=document.getElementById('newCatInput');
-  inp.style.display='block'; inp.focus();
+  inp.style.display='block';inp.focus();
 }
 
 function saveCat(){
@@ -485,7 +542,7 @@ function saveCat(){
   const d=db();
   if(!d.categories.includes(name)) d.categories.push(name);
   save(d);
-  inp.value=''; inp.style.display='none';
+  inp.value='';inp.style.display='none';
   populateCatSelect();
   document.getElementById('txCat').value=name;
   showNotif('Kategori ditambahkan!');
@@ -496,117 +553,94 @@ function addCatFromSettings(){
   const name=inp.value.trim();
   if(!name) return;
   const d=db();
-  if(!d.categories.includes(name)){ d.categories.push(name); save(d); showNotif('Kategori ditambahkan!'); }
-  inp.value='';
-  renderCatManage();
-  populateCatSelect();
+  if(!d.categories.includes(name)){d.categories.push(name);save(d);showNotif('Ditambahkan!');}
+  inp.value='';renderCatManage();populateCatSelect();
 }
 
 function deleteCat(cat){
   const d=db();
   d.categories=d.categories.filter(c=>c!==cat);
-  save(d);
-  renderCatManage();
-  populateCatSelect();
+  save(d);renderCatManage();populateCatSelect();
 }
 
 function renderCatManage(){
   const d=db();
   document.getElementById('catManageList').innerHTML=
-    d.categories.map(c=>`<div class="cat-tag">${c}<button onclick="deleteCat('${c}')">✕</button></div>`).join('');
+    d.categories.map(c=>`<div class="cat-tag">${c}<button onclick="deleteCat('${c.replace(/'/g,"\\'")}')">✕</button></div>`).join('');
 }
 
-// ── SAVE TRANSACTION ─────────────────────────────────────
+// ── SAVE TX ──────────────────────────────────────────────
 function saveTx(){
-  if(_savingTx) return;
-  _savingTx=true;
-  setTimeout(()=>{ _savingTx=false; },3000);
+  if(_saving) return;
+  _saving=true;
+  setTimeout(()=>{_saving=false;},3000);
 
   const d=db();
   const amt=getRaw('txAmt');
   const walletName=document.getElementById('txWallet').value;
   const date=document.getElementById('txDate').value;
-  if(!amt){ showNotif('Masukkan nominal!'); _savingTx=false; return; }
-  if(!walletName){ showNotif('Pilih wallet!'); _savingTx=false; return; }
-  if(!date){ showNotif('Pilih tanggal!'); _savingTx=false; return; }
+  if(!amt){showNotif('Masukkan nominal!');_saving=false;return;}
+  if(!walletName){showNotif('Pilih wallet!');_saving=false;return;}
+  if(!date){showNotif('Pilih tanggal!');_saving=false;return;}
 
   const tx={
-    id:Date.now(),
-    type:curType,
+    id:Date.now(),type:curType,
     owner:curType==='in'?'Pemasukan':curOwner,
     wallet:walletName,
     walletTo:curType==='tf'?document.getElementById('txWalletTo').value:'',
     cat:curType==='tf'?'Transfer':document.getElementById('txCat').value,
-    amt,
-    desc:document.getElementById('txDesc').value.trim(),
-    date
+    amt,desc:document.getElementById('txDesc').value.trim(),date
   };
 
-  if(curType==='tf'&&!tx.walletTo){ showNotif('Pilih wallet tujuan!'); _savingTx=false; return; }
-  if(curType==='tf'&&tx.wallet===tx.walletTo){ showNotif('Wallet tidak boleh sama!'); _savingTx=false; return; }
+  if(curType==='tf'&&!tx.walletTo){showNotif('Pilih wallet tujuan!');_saving=false;return;}
+  if(curType==='tf'&&tx.wallet===tx.walletTo){showNotif('Wallet tidak boleh sama!');_saving=false;return;}
 
   d.transactions.unshift(tx);
   save(d);
-
-  // Append to Sheets
   appendToSheets(tx).catch(()=>{});
 
-  // Reset form
   document.getElementById('txAmt').value='';
   if(document.getElementById('txAmt').dataset) document.getElementById('txAmt').dataset.raw='0';
   document.getElementById('txDesc').value='';
   document.getElementById('txDate').value=new Date().toISOString().slice(0,10);
-
   renderWalletTab();
   showNotif('✅ Tersimpan!');
 }
 
 // ── BUDGET ───────────────────────────────────────────────
-function openBudgetModal(){
-  populateCatSelect('bCat');
-  document.getElementById('bLimit').value='';
-  document.getElementById('budgetModal').style.display='block';
-}
+function openBudgetModal(){populateCatSelect('bCat');document.getElementById('bLimit').value='';document.getElementById('budgetModal').style.display='block';}
 
 function saveBudget(){
   const cat=document.getElementById('bCat').value;
   const limit=getRaw('bLimit');
   const owner=document.getElementById('bOwner').value;
-  if(!limit){ showNotif('Masukkan limit!'); return; }
+  if(!limit){showNotif('Masukkan limit!');return;}
   const d=db();
   const bi=d.budgets.findIndex(b=>b.cat===cat&&b.owner===owner);
   if(bi>=0) d.budgets[bi].limit=limit;
   else d.budgets.push({id:Date.now(),cat,limit,owner});
-  save(d);
-  closeModal('budgetModal');
-  renderBudgetList();
-  showNotif('Budget disimpan!');
+  save(d);closeModal('budgetModal');renderBudgetList();showNotif('Budget disimpan!');
 }
 
 function deleteBudget(id){
-  const d=db();
-  d.budgets=d.budgets.filter(b=>b.id!==id);
-  save(d);
-  renderBudgetList();
+  const d=db();d.budgets=d.budgets.filter(b=>b.id!==id);save(d);renderBudgetList();
 }
 
 function renderBudgetList(){
   const d=db();
   const el=document.getElementById('budgetList');
   if(!d.budgets.length){
-    el.innerHTML='<div class="empty"><div class="ei">🎯</div><p>Belum ada budget.<br>Set budget per kategori di atas.</p></div>';
-    return;
+    el.innerHTML='<div class="empty"><div class="ei">🎯</div><p>Belum ada budget.<br>Set budget per kategori di atas.</p></div>';return;
   }
-  const now=new Date();
-  const ms=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-01`;
-  const me=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-31`;
-  el.innerHTML=d.budgets.map(b=>{
-    const spent=d.transactions.filter(t=>t.type==='out'&&t.cat===b.cat&&t.date>=ms&&t.date<=me&&(b.owner==='all'||t.owner===b.owner)).reduce((s,t)=>s+t.amt,0);
+  const p=getPayPeriod(0); // always current period for budget
+  el.innerHTML=`<div class="hint info" style="margin-bottom:10px">Periode: ${p.label} (${p.start} — ${p.end})</div>`+
+  d.budgets.map(b=>{
+    const spent=d.transactions.filter(t=>t.type==='out'&&t.cat===b.cat&&t.date>=p.start&&t.date<=p.end&&(b.owner==='all'||t.owner===b.owner)).reduce((s,t)=>s+t.amt,0);
     const pct=Math.min(100,Math.round(spent/b.limit*100));
     const cls=pct>=100?'over':pct>=80?'warn':'safe';
     return `<div class="card">
       <div class="budget-top">
-        <div class="budget-cat">📌 ${b.cat} <span style="font-size:10px;color:#4a6080">${b.owner==='all'?'Semua':b.owner}</span></div>
+        <div class="budget-cat">${b.cat} <span style="font-size:10px;color:#4a6080">${b.owner==='all'?'Semua':b.owner}</span></div>
         <button class="btn-danger" onclick="deleteBudget(${b.id})" style="padding:4px 8px;font-size:11px">✕</button>
       </div>
       ${pct>=80?`<div class="hint ${pct>=100?'danger':'warn'}" style="margin-bottom:8px;font-size:11px">${pct>=100?'⚠️ Budget terlampaui!':'⚡ Mendekati limit ('+pct+'%)'}</div>`:''}
@@ -622,50 +656,42 @@ function renderBudgetList(){
 // ── WALLET TAB ───────────────────────────────────────────
 function renderWalletTab(){
   const d=db();
-  const balances=calcWalletBalances();
-  const total=Object.values(balances).reduce((s,v)=>s+v,0);
-
+  const bal=calcWalletBalances();
+  const total=Object.values(bal).reduce((s,v)=>s+v,0);
   document.getElementById('walletTotalAmt').textContent=fmt(total);
-  document.getElementById('walletTotalSub').textContent=
-    `${d.wallets.length} wallet · ${d.lastPull?'Last pull: '+d.lastPull:'Belum pernah pull'}`;
+  document.getElementById('walletTotalSub').textContent=`${d.wallets.length} wallet · ${d.lastPull?'Last pull: '+d.lastPull:'Belum pull'}`;
 
   const el=document.getElementById('walletList');
   if(!d.wallets.length){
-    el.innerHTML='<div class="empty"><div class="ei">👛</div><p>Belum ada data wallet.<br>Lakukan Pull dari Sheets.</p></div>';
-    return;
+    el.innerHTML='<div class="empty"><div class="ei">👛</div><p>Belum ada wallet.<br>Lakukan Pull dari Sheets.</p></div>';return;
   }
-
-  // Sort by balance desc
-  const sorted=[...d.wallets].sort((a,b)=>(balances[b.nama]||0)-(balances[a.nama]||0));
-  const maxBal=Math.max(...sorted.map(w=>balances[w.nama]||0),1);
+  const sorted=[...d.wallets].sort((a,b)=>(bal[b.nama]||0)-(bal[a.nama]||0));
+  const maxBal=Math.max(...sorted.map(w=>Math.abs(bal[w.nama]||0)),1);
 
   el.innerHTML=sorted.map(w=>{
-    const bal=balances[w.nama]||0;
-    const pct=Math.round(bal/maxBal*100);
-    const txCount=d.transactions.filter(t=>t.wallet===w.nama||t.walletTo===w.nama).length;
+    const b=bal[w.nama]||0;
+    const pct=Math.round(Math.abs(b)/maxBal*100);
+    const txC=d.transactions.filter(t=>t.wallet===w.nama||t.walletTo===w.nama).length;
     return `<div class="wcard">
       <div class="wcard-icon">${w.icon||'💳'}</div>
       <div class="wcard-info">
         <div class="wcard-name">${w.nama}</div>
-        <div class="wcard-type">${w.tipe||''} · ${txCount} transaksi</div>
-        <div class="prog-wrap" style="margin-top:6px">
-          <div class="prog-track"><div class="prog-fill safe" style="width:${pct}%"></div></div>
-        </div>
+        <div class="wcard-type">${w.tipe||''} · ${txC} transaksi</div>
+        <div class="prog-wrap"><div class="prog-track"><div class="prog-fill safe" style="width:${pct}%"></div></div></div>
       </div>
       <div class="wcard-right">
-        <div class="wcard-bal">${fmt(bal)}</div>
-        <div class="wcard-updated">Lokal</div>
+        <div class="wcard-bal" style="color:${b>=0?'#10b981':'#ef4444'}">${fmt(b)}</div>
+        <div class="wcard-updated">Kalkulasi lokal</div>
       </div>
     </div>`;
   }).join('');
 }
 
 // ── TRANSACTIONS ─────────────────────────────────────────
-function filterTx(el,filter){
-  txFilter=filter;
+function filterTx(el,f){
+  txFilter=f;
   document.querySelectorAll('.fpill').forEach(p=>p.classList.remove('on'));
-  el.classList.add('on');
-  renderTxList();
+  el.classList.add('on');renderTxList();
 }
 
 function renderTxList(){
@@ -675,38 +701,25 @@ function renderTxList(){
   else if(txFilter==='in') txs=txs.filter(t=>t.type==='in');
   else if(txFilter==='Keluarga') txs=txs.filter(t=>t.owner==='Keluarga');
   else if(txFilter==='Pribadi') txs=txs.filter(t=>t.owner==='Pribadi');
-
   txs.sort((a,b)=>{
     const da=String(a.date||'').slice(0,10);
     const db2=String(b.date||'').slice(0,10);
-    if(db2!==da) return db2.localeCompare(da);
-    return b.id-a.id;
+    return db2!==da?db2.localeCompare(da):b.id-a.id;
   });
-
   const el=document.getElementById('txList');
-  if(!txs.length){
-    el.innerHTML='<div class="empty"><div class="ei">📋</div><p>Belum ada transaksi.</p></div>';
-    return;
-  }
-
+  if(!txs.length){el.innerHTML='<div class="empty"><div class="ei">📋</div><p>Belum ada transaksi.</p></div>';return;}
   const byDate={};
-  txs.forEach(t=>{
-    const dk=String(t.date||'').slice(0,10);
-    if(!byDate[dk]) byDate[dk]=[];
-    byDate[dk].push(t);
-  });
-
+  txs.forEach(t=>{const dk=String(t.date||'').slice(0,10);if(!byDate[dk])byDate[dk]=[];byDate[dk].push(t);});
   el.innerHTML=Object.keys(byDate).sort().reverse().map(date=>{
-    const items=byDate[date];
-    return `<div class="slbl">${date}</div><div class="card">${items.map(t=>{
+    return `<div class="slbl">${date}</div><div class="card">${byDate[date].map(t=>{
       const icon=t.type==='out'?'⬆':t.type==='in'?'⬇':'↔';
       const ownerTag=t.owner&&t.owner!=='Pemasukan'?`<span class="tx-tag ${t.owner==='Keluarga'?'fam':'pri'}">${t.owner}</span>`:'';
-      const wDisplay=t.type==='tf'?`${t.wallet} → ${t.walletTo}`:t.wallet;
+      const wDisp=t.type==='tf'?`${t.wallet}→${t.walletTo}`:t.wallet;
       return `<div class="tx-item">
         <div class="tx-icon ${t.type}">${icon}</div>
         <div class="tx-info">
           <div class="tx-desc">${t.desc||t.cat}</div>
-          <div class="tx-meta">${t.cat} · ${wDisplay}${ownerTag}</div>
+          <div class="tx-meta">${t.cat} · ${wDisp}${ownerTag}</div>
         </div>
         <div class="tx-amt ${t.type}">${t.type==='out'?'-':'+'} ${fmtk(t.amt)}</div>
         <div class="tx-actions">
@@ -719,78 +732,79 @@ function renderTxList(){
 }
 
 function deleteTx(id){
-  const d=db();
-  d.transactions=d.transactions.filter(t=>t.id!==id);
-  save(d);
-  renderTxList();
-  renderWalletTab();
-  showNotif('Transaksi dihapus. Edit Sheets jika perlu.');
+  const d=db();d.transactions=d.transactions.filter(t=>t.id!==id);save(d);
+  renderTxList();renderWalletTab();showNotif('Dihapus. Edit Sheets jika perlu.');
 }
 
 function openEditTx(id){
-  const d=db();
-  const t=d.transactions.find(x=>x.id===id);
-  if(!t) return;
+  const d=db();const t=d.transactions.find(x=>x.id===id);if(!t) return;
   editTxId=id;
   document.getElementById('etDate').value=t.date;
   document.getElementById('etAmt').value=t.amt;
   document.getElementById('etDesc').value=t.desc||'';
-  populateCatSelect('etCat');
-  document.getElementById('etCat').value=t.cat;
+  populateCatSelect('etCat');document.getElementById('etCat').value=t.cat;
   document.getElementById('editTxModal').style.display='block';
 }
 
 function saveEditTx(){
-  const d=db();
-  const ti=d.transactions.findIndex(t=>t.id===editTxId);
-  if(ti<0) return;
+  const d=db();const ti=d.transactions.findIndex(t=>t.id===editTxId);if(ti<0) return;
   d.transactions[ti].date=document.getElementById('etDate').value;
   d.transactions[ti].cat=document.getElementById('etCat').value;
   d.transactions[ti].amt=getRaw('etAmt');
   d.transactions[ti].desc=document.getElementById('etDesc').value.trim();
-  save(d);
-  closeModal('editTxModal');
-  renderTxList();
-  renderWalletTab();
-  showNotif('Transaksi diupdate. Edit Sheets jika perlu.');
-  editTxId=null;
+  save(d);closeModal('editTxModal');renderTxList();renderWalletTab();
+  showNotif('Diupdate. Edit Sheets jika perlu.');editTxId=null;
+}
+
+// ── PIE CHART SVG ────────────────────────────────────────
+function buildPieChart(data, total){
+  if(!data.length||!total) return '<div style="color:#4a6080;font-size:12px;text-align:center;padding:20px">Tidak ada data</div>';
+
+  const cx=90,cy=90,r=70;
+  let paths='';let currentAngle=-Math.PI/2;
+  data.forEach((d,i)=>{
+    const slice=d.val/total*Math.PI*2;
+    const x1=cx+r*Math.cos(currentAngle);
+    const y1=cy+r*Math.sin(currentAngle);
+    const x2=cx+r*Math.cos(currentAngle+slice);
+    const y2=cy+r*Math.sin(currentAngle+slice);
+    const large=slice>Math.PI?1:0;
+    paths+=`<path d="M${cx},${cy} L${x1.toFixed(1)},${y1.toFixed(1)} A${r},${r} 0 ${large},1 ${x2.toFixed(1)},${y2.toFixed(1)} Z" fill="${d.color}" opacity="0.9"/>`;
+    currentAngle+=slice;
+  });
+
+  // Center hole
+  paths+=`<circle cx="${cx}" cy="${cy}" r="38" fill="#0d1f3c"/>`;
+  paths+=`<text x="${cx}" y="${cy-6}" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="Arial">TOTAL</text>`;
+  paths+=`<text x="${cx}" y="${cy+8}" text-anchor="middle" fill="#10b981" font-size="10" font-family="Arial" font-weight="bold">${fmtk(total)}</text>`;
+
+  const legend=data.map(d=>`
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+      <div style="width:10px;height:10px;border-radius:2px;background:${d.color};flex-shrink:0"></div>
+      <div style="flex:1;font-size:11px;color:#cbd5e1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${d.label}</div>
+      <div style="font-size:11px;color:#e8f0fe;font-weight:600;white-space:nowrap">${Math.round(d.val/total*100)}%</div>
+    </div>
+  `).join('');
+
+  return `<div style="display:flex;gap:14px;align-items:center">
+    <svg width="180" height="180" viewBox="0 0 180 180" style="flex-shrink:0">${paths}</svg>
+    <div style="flex:1;min-width:0">${legend}</div>
+  </div>`;
 }
 
 // ── DASHBOARD ────────────────────────────────────────────
-function selPeriod(el,period){
-  curPeriod=period;
-  document.querySelectorAll('.pt').forEach(p=>p.classList.remove('on'));
-  el.classList.add('on');
-  renderDash();
-}
-
-function getPeriodRange(period){
-  const now=new Date();
-  let start,end;
-  if(period==='week'){
-    const day=now.getDay();
-    const diffToMon=day===0?-6:1-day;
-    start=new Date(now.getFullYear(),now.getMonth(),now.getDate()+diffToMon);
-    end=new Date(start.getFullYear(),start.getMonth(),start.getDate()+6);
-  } else if(period==='month'){
-    start=new Date(now.getFullYear(),now.getMonth(),1);
-    end=new Date(now.getFullYear(),now.getMonth()+1,0);
-  } else {
-    start=new Date(now.getFullYear(),0,1);
-    end=new Date(now.getFullYear(),11,31);
-  }
-  return{
-    start:start.toISOString().slice(0,10),
-    end:end.toISOString().slice(0,10)
-  };
-}
-
 function renderDash(){
   const d=db();
-  const {start,end}=getPeriodRange(curPeriod);
+  const el=document.getElementById('dashContent');
+
+  if(dashView==='year'){
+    renderDashYear(d,el);return;
+  }
+
+  const p=getPayPeriod(periodOffset);
   const txs=d.transactions.filter(t=>{
     const dt=String(t.date||'').slice(0,10);
-    return dt.match(/^\d{4}-\d{2}-\d{2}$/)&&dt>=start&&dt<=end;
+    return dt.match(/^\d{4}-\d{2}-\d{2}$/)&&dt>=p.start&&dt<=p.end;
   });
 
   const totalOut=txs.filter(t=>t.type==='out').reduce((s,t)=>s+t.amt,0);
@@ -799,39 +813,32 @@ function renderDash(){
   const priOut=txs.filter(t=>t.type==='out'&&t.owner==='Pribadi').reduce((s,t)=>s+t.amt,0);
   const net=totalIn-totalOut;
 
+  // Category breakdown for pie
   const catTotals={};
-  txs.filter(t=>t.type==='out').forEach(t=>{ catTotals[t.cat]=(catTotals[t.cat]||0)+t.amt; });
-  const catSorted=Object.entries(catTotals).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  txs.filter(t=>t.type==='out').forEach(t=>{catTotals[t.cat]=(catTotals[t.cat]||0)+t.amt;});
+  const catSorted=Object.entries(catTotals).sort((a,b)=>b[1]-a[1]);
+  const pieData=catSorted.map(([cat,val],i)=>({label:cat,val,color:getCatColor(cat,i)}));
   const maxCat=catSorted.length?catSorted[0][1]:1;
 
-  const balances=calcWalletBalances();
-  const totalWallet=Object.values(balances).reduce((s,v)=>s+v,0);
+  const bal=calcWalletBalances();
+  const totalWallet=Object.values(bal).reduce((s,v)=>s+v,0);
 
-  const months=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
-  const curYear=new Date().getFullYear();
-  const monthlyData=months.map((m,i)=>{
-    const ms=`${curYear}-${String(i+1).padStart(2,'0')}-01`;
-    const me=`${curYear}-${String(i+1).padStart(2,'0')}-31`;
-    const mTxs=d.transactions.filter(t=>{
-      const dt=String(t.date||'').slice(0,10);
-      return dt>=ms&&dt<=me;
-    });
-    return{
-      label:m,
-      out:mTxs.filter(t=>t.type==='out').reduce((s,t)=>s+t.amt,0),
-      inp:mTxs.filter(t=>t.type==='in').reduce((s,t)=>s+t.amt,0)
-    };
-  });
-  const maxMonth=Math.max(...monthlyData.map(m=>Math.max(m.out,m.inp)),1);
-  const periodLabel=curPeriod==='week'?'Minggu Ini':curPeriod==='month'?'Bulan Ini':'Tahun Ini';
+  // Days remaining in period
+  const today=new Date().toISOString().slice(0,10);
+  const endD=new Date(p.end);
+  const todayD=new Date(today);
+  const daysLeft=Math.max(0,Math.ceil((endD-todayD)/86400000));
+  const totalDays=Math.ceil((endD-new Date(p.start))/86400000)+1;
+  const daysElapsed=totalDays-daysLeft;
+  const burnRate=daysElapsed>0?totalOut/daysElapsed:0;
 
-  const el=document.getElementById('dashContent');
   el.innerHTML=`
     <div class="hero">
-      <div class="hero-lbl">Saldo Bersih · ${periodLabel}</div>
+      <div class="hero-lbl">Saldo Bersih · ${p.label}</div>
       <div class="hero-amt" style="color:${net>=0?'#10b981':'#ef4444'}">${net>=0?'+':''}${fmt(net)}</div>
-      <div class="hero-sub">${fmt(totalIn)} masuk · ${fmt(totalOut)} keluar</div>
+      <div class="hero-sub">${fmt(totalIn)} masuk · ${fmt(totalOut)} keluar · ${daysLeft} hari tersisa</div>
     </div>
+
     <div class="sgrid">
       <div class="sc red"><div class="sl">Pengeluaran</div><div class="sv">${fmtk(totalOut)}</div></div>
       <div class="sc green"><div class="sl">Pemasukan</div><div class="sv">${fmtk(totalIn)}</div></div>
@@ -839,115 +846,123 @@ function renderDash(){
       <div class="sc yellow"><div class="sl">Pribadi</div><div class="sv">${fmtk(priOut)}</div></div>
     </div>
 
-    <div class="slbl">Pengeluaran vs Pemasukan</div>
-    <div class="card">
-      ${curPeriod==='year'?`
-        <div style="font-size:10px;color:#4a6080;margin-bottom:8px">Trend ${curYear}</div>
-        <div class="bar-chart" style="height:100px">
-          ${monthlyData.map(m=>`
-            <div class="bc-col">
-              <div style="flex:1;display:flex;align-items:flex-end;gap:1px;width:100%">
-                <div style="flex:1;border-radius:3px 3px 0 0;min-height:2px;height:${Math.round(m.out/maxMonth*80)}px;background:#ef4444;opacity:0.9"></div>
-                <div style="flex:1;border-radius:3px 3px 0 0;min-height:2px;height:${Math.round(m.inp/maxMonth*80)}px;background:#10b981;opacity:0.9"></div>
-              </div>
-              <div class="bc-lbl">${m.label}</div>
-            </div>
-          `).join('')}
-        </div>
-        <div style="display:flex;gap:12px;margin-top:8px">
-          <div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#ef4444"><div style="width:10px;height:10px;background:#ef4444;border-radius:2px"></div>Keluar</div>
-          <div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#10b981"><div style="width:10px;height:10px;background:#10b981;border-radius:2px"></div>Masuk</div>
-        </div>
-      `:`
-        <div class="bar-chart">
-          <div class="bc-col">
-            <div class="bc-amt" style="color:#ef4444">${fmtk(totalOut)}</div>
-            <div style="flex:1;display:flex;align-items:flex-end;width:100%">
-              <div class="bc-bar" style="height:${totalOut||totalIn?Math.round(totalOut/Math.max(totalOut,totalIn)*75):2}px;background:#ef4444"></div>
-            </div>
-            <div class="bc-lbl">⬆ Pengeluaran</div>
-          </div>
-          <div class="bc-col">
-            <div class="bc-amt" style="color:#10b981">${fmtk(totalIn)}</div>
-            <div style="flex:1;display:flex;align-items:flex-end;width:100%">
-              <div class="bc-bar" style="height:${totalOut||totalIn?Math.round(totalIn/Math.max(totalOut,totalIn)*75):2}px;background:#10b981"></div>
-            </div>
-            <div class="bc-lbl">⬇ Pemasukan</div>
-          </div>
-        </div>
-      `}
-    </div>
+    ${burnRate>0?`<div class="hint info" style="margin-bottom:12px">
+      📊 Burn rate: ${fmt(burnRate)}/hari · Proyeksi akhir periode: ${fmt(totalOut+burnRate*daysLeft)}
+    </div>`:''}
 
-    <div class="slbl">Keluarga vs Pribadi</div>
-    <div class="card">
-      <div class="bar-chart">
-        <div class="bc-col">
-          <div class="bc-amt" style="color:#3b82f6">${fmtk(famOut)}</div>
-          <div style="flex:1;display:flex;align-items:flex-end;width:100%">
-            <div class="bc-bar" style="height:${famOut||priOut?Math.round(famOut/Math.max(famOut,priOut)*75):2}px;background:linear-gradient(180deg,#3b82f6,#1d4ed8)"></div>
-          </div>
-          <div class="bc-lbl">👨‍👩‍👧 Keluarga</div>
-        </div>
-        <div class="bc-col">
-          <div class="bc-amt" style="color:#a855f7">${fmtk(priOut)}</div>
-          <div style="flex:1;display:flex;align-items:flex-end;width:100%">
-            <div class="bc-bar" style="height:${famOut||priOut?Math.round(priOut/Math.max(famOut,priOut)*75):2}px;background:linear-gradient(180deg,#a855f7,#7c3aed)"></div>
-          </div>
-          <div class="bc-lbl">🙋 Pribadi</div>
-        </div>
-      </div>
-    </div>
+    <div class="slbl">Breakdown Pengeluaran</div>
+    <div class="card">${buildPieChart(pieData,totalOut)}</div>
 
-    <div class="slbl">Top Kategori</div>
+    <div class="slbl">Detail per Kategori</div>
     <div class="card">
-      ${catSorted.length?catSorted.map(([cat,amt])=>{
-        const pct=totalOut?Math.round(amt/totalOut*100):0;
+      ${catSorted.length?catSorted.map(([cat,amt],i)=>{
+        const pct=Math.round(amt/totalOut*100);
+        const clr=getCatColor(cat,i);
         return `<div class="budget-item">
           <div class="budget-top">
-            <div class="budget-cat">📌 ${cat}</div>
+            <div class="budget-cat" style="color:${clr}">${cat}</div>
             <div class="budget-amts">${fmt(amt)} <span style="color:#4a6080">${pct}%</span></div>
           </div>
           <div class="prog-wrap">
-            <div class="prog-track"><div class="prog-fill safe" style="width:${Math.round(amt/maxCat*100)}%"></div></div>
+            <div class="prog-track">
+              <div class="prog-fill" style="width:${Math.round(amt/maxCat*100)}%;background:${clr}"></div>
+            </div>
           </div>
         </div>`;
-      }).join(''):`<div style="color:#4a6080;font-size:12px;text-align:center;padding:10px">Belum ada data untuk ${periodLabel}</div>`}
+      }).join(''):`<div style="color:#4a6080;font-size:12px;text-align:center;padding:10px">Belum ada pengeluaran di periode ini</div>`}
     </div>
 
     <div class="slbl">Total Saldo Wallet</div>
     <div class="card" style="text-align:center;padding:16px">
       <div style="font-size:26px;font-weight:700;color:#10b981">${fmt(totalWallet)}</div>
-      <div style="font-size:11px;color:#4a6080;margin-top:4px">${d.wallets.length} wallet · ${start} s/d ${end}</div>
+      <div style="font-size:11px;color:#4a6080;margin-top:4px">${d.wallets.length} wallet aktif</div>
     </div>
   `;
 }
 
-// ── GOOGLE SHEETS SYNC ───────────────────────────────────
+function renderDashYear(d,el){
+  const curYear=new Date().getFullYear();
+  const months=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+
+  // For each pay period in the year (Jan-Dec 2026 = 24 Dec 2025 - 23 Jan 2027)
+  const periodData=months.map((m,i)=>{
+    // Period "i" = starts 24th of month i, ends 23rd of month i+1
+    const sM=i;let sY=curYear;
+    const start=`${sY}-${String(sM+1).padStart(2,'0')}-${String(CUTOFF_DAY).padStart(2,'0')}`;
+    let eM=i+1;let eY=curYear;
+    if(eM>11){eM=0;eY++;}
+    const end=`${eY}-${String(eM+1).padStart(2,'0')}-23`;
+    const pTxs=d.transactions.filter(t=>{const dt=String(t.date||'').slice(0,10);return dt>=start&&dt<=end;});
+    return{
+      label:m,
+      out:pTxs.filter(t=>t.type==='out').reduce((s,t)=>s+t.amt,0),
+      inp:pTxs.filter(t=>t.type==='in').reduce((s,t)=>s+t.amt,0)
+    };
+  });
+
+  const maxVal=Math.max(...periodData.map(p=>Math.max(p.out,p.inp)),1);
+
+  el.innerHTML=`
+    <div class="slbl">Trend Pengeluaran vs Pemasukan ${curYear}</div>
+    <div class="card">
+      <div style="display:flex;align-items:flex-end;gap:5px;height:110px;margin-top:8px">
+        ${periodData.map(p=>`
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px">
+            <div style="flex:1;width:100%;display:flex;align-items:flex-end;gap:1px">
+              <div style="flex:1;border-radius:3px 3px 0 0;min-height:2px;height:${Math.round(p.out/maxVal*90)}px;background:#ef4444;opacity:0.85"></div>
+              <div style="flex:1;border-radius:3px 3px 0 0;min-height:2px;height:${Math.round(p.inp/maxVal*90)}px;background:#10b981;opacity:0.85"></div>
+            </div>
+            <div style="font-size:8px;color:#4a6080;text-align:center">${p.label}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div style="display:flex;gap:14px;margin-top:10px">
+        <div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#ef4444"><div style="width:10px;height:10px;background:#ef4444;border-radius:2px"></div>Pengeluaran</div>
+        <div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#10b981"><div style="width:10px;height:10px;background:#10b981;border-radius:2px"></div>Pemasukan</div>
+      </div>
+    </div>
+
+    <div class="slbl">Ringkasan per Periode</div>
+    <div class="card">
+      ${periodData.map((p,i)=>{
+        const net=p.inp-p.out;
+        if(!p.out&&!p.inp) return '';
+        return `<div class="budget-item">
+          <div class="budget-top">
+            <div class="budget-cat">${p.label} ${curYear}</div>
+            <div style="text-align:right;font-size:12px">
+              <div style="color:#ef4444">-${fmtk(p.out)}</div>
+              <div style="color:${net>=0?'#10b981':'#ef4444'};font-weight:600">${net>=0?'+':''}${fmtk(net)}</div>
+            </div>
+          </div>
+          <div class="prog-wrap">
+            <div class="prog-track">
+              <div class="prog-fill ${net>=0?'safe':'over'}" style="width:${Math.min(100,Math.round(p.out/Math.max(p.inp,1)*100))}%"></div>
+            </div>
+          </div>
+        </div>`;
+      }).join('')||'<div style="color:#4a6080;font-size:12px;text-align:center;padding:10px">Belum ada data tahun ini</div>'}
+    </div>
+  `;
+}
+
+// ── SHEETS SYNC ──────────────────────────────────────────
 async function appendToSheets(tx){
   try{
     const params=new URLSearchParams({
-      type:'append',
-      tanggal:tx.date,
+      type:'append',tanggal:tx.date,
       tipe:tx.type==='out'?'Pengeluaran':tx.type==='in'?'Pemasukan':'Transfer',
-      owner:tx.owner||'-',
-      wallet:tx.wallet||'-',
-      walletTo:tx.walletTo||'-',
-      kategori:tx.cat||'-',
-      nominal:tx.amt,
-      catatan:tx.desc||'',
-      txid:tx.id
+      owner:tx.owner||'-',wallet:tx.wallet||'-',walletTo:tx.walletTo||'-',
+      kategori:tx.cat||'-',nominal:tx.amt,catatan:tx.desc||'',txid:tx.id
     });
     await fetch(SHEET_URL+'?'+params.toString(),{method:'GET',mode:'no-cors'});
-  }catch(e){
-    console.warn('Append failed:',e);
-  }
+  }catch(e){console.warn('Append failed:',e);}
 }
 
 async function pullAll(){
   showNotif('⏳ Pulling dari Sheets...');
   try{
-    // Pull transaksi dan wallet sekaligus
-    const [txRes, wRes] = await Promise.all([
+    const [txRes,wRes]=await Promise.all([
       fetch(SHEET_URL+'?type=pull'),
       fetch(SHEET_URL+'?type=pull_wallets')
     ]);
@@ -955,36 +970,27 @@ async function pullAll(){
     const wData=await wRes.json();
     const d=db();
 
-    // Update transaksi
     if(txData.status==='ok'&&txData.transactions){
       d.transactions=txData.transactions.map(r=>{
-        let dateVal=String(r[0]||'').trim().slice(0,10);
+        const dateVal=String(r[0]||'').trim().slice(0,10);
         return{
           id:parseInt(r[8])||Date.now(),
           date:dateVal,
           type:r[1]==='Pengeluaran'?'out':r[1]==='Pemasukan'?'in':'tf',
-          owner:r[2]||'-',
-          wallet:r[3]||'-',
-          walletTo:r[4]||'',
-          cat:r[5]||'-',
-          amt:parseFloat(r[6])||0,
-          desc:r[7]||''
+          owner:r[2]||'-',wallet:r[3]||'-',walletTo:r[4]||'',
+          cat:r[5]||'-',amt:parseFloat(r[6])||0,desc:r[7]||''
         };
       }).filter(t=>t.date.match(/^\d{4}-\d{2}-\d{2}$/));
     }
 
-    // Update wallets dari sheet
     if(wData.status==='ok'&&wData.wallets){
       d.wallets=wData.wallets;
     }
 
     d.lastPull=new Date().toLocaleString('id-ID');
     save(d);
-
     populateWalletSelects();
-    renderTxList();
-    renderWalletTab();
-    renderDash();
+    renderTxList();renderWalletTab();renderDash();renderBudgetList();
     showNotif(`✅ Pull berhasil! ${d.transactions.length} transaksi · ${d.wallets.length} wallet`);
   }catch(e){
     console.warn('Pull error:',e);
@@ -993,9 +999,9 @@ async function pullAll(){
 }
 
 // ── MODAL / NAV ──────────────────────────────────────────
-function closeModal(id){ document.getElementById(id).style.display='none'; }
-function openSettings(){ renderCatManage(); document.getElementById('settingsModal').style.display='block'; }
-function clearAllData(){ if(confirm('Hapus semua data FamGet?')){ localStorage.removeItem(DB_KEY); location.reload(); } }
+function closeModal(id){document.getElementById(id).style.display='none';}
+function openSettings(){renderCatManage();document.getElementById('settingsModal').style.display='block';}
+function clearAllData(){if(confirm('Hapus semua data FamGet?')){localStorage.removeItem(DB_KEY);location.reload();}}
 
 function go(page){
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
@@ -1005,12 +1011,12 @@ function go(page){
   if(page==='wallet') renderWalletTab();
   if(page==='budget') renderBudgetList();
   if(page==='tx') renderTxList();
-  if(page==='dash') renderDash();
+  if(page==='dash'){updatePeriodNav();renderDash();}
 }
 
 function showNotif(msg){
   const n=document.getElementById('notif');
-  n.textContent=msg; n.classList.add('show');
+  n.textContent=msg;n.classList.add('show');
   setTimeout(()=>n.classList.remove('show'),2500);
 }
 
